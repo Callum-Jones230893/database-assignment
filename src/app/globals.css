@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+}
+/* 
+@theme {
+  
+}
+
+.header-text {
+  @apply
+
+} */
+
+.button {
+  @apply
+  border
+  border-blue-500
+  rounded-2xl 
+  w-fit 
+  p-2
+}

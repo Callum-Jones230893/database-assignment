@@ -1,0 +1,83 @@
+My database assignment will be to create a responsive application using NEXT.js and Supabase in order to learn how end to end systems work and get an understanding of how back end is done.
+
+The assignment will be an app that allows people to sign up to tournaments (table tennis etc), through signing up without an account (read/write available to public to enter their name),
+or with an account via a sign up page. 
+
+Users without an actual account can only view posts (tournaments etc), and sign their name up.
+Users with an account can create the posts, comment on the posts as well as comment on the games they have participated in, i.e if they have a game, they can click that game and choose to add
+a comment.
+
+There will also be a role system in place where Admins are the only ones able to populate the brackets of a tournament, either a button only visible to them , or something along those lines.
+
+There will be six (currently) tables, I will also add a document from smart draw, demonstrating the tables and the relationships between them.
+
+Users, Posts, Comments, Brackets, Games, and Applicants(people who sign up for a tournament wihtout an account)
+
+The relationships of each table for now is the following;
+Users:
+Users have a one to many relationship with Posts.
+Users have a one to many relationship with Comments.
+Users have a many to many relationship with Brackets.
+Users have a many to many relationship with Games.
+
+Posts:
+Posts have a many to one relationship with Users.
+Posts have a one to many relationship with Comments.
+
+Comments:
+Comments have a many to one relationship with Users.
+Comments have a many to one relationship with Posts.
+
+Brackets: 
+Brackets have a many to many relationship with Users.
+Brackets have a many to many relationship with Applicants.
+Brackets have a many to many relationship with Games.
+
+Games:
+Games have a many to many relationship with Users.
+Games have a many to many relationship with Applicants.
+Games have a many to many relationship with Brackets.
+
+Applicants:
+Applicants have a many to many relationship with Brackets.
+Applicants have a many to many relationship with Games.
+
+I plan on integrating something like brackets-viewer.js, to use as a library for the brackets and to render them.
+
+The components and structure I believe I will need is:
+I will need a header, which also acts as the navigation, in the header/navigation, there is an option to login/signup, if you are not logged in, and if you are logged in, the option will
+change to sign out / my profile.
+
+<Header />
+  <Navigation />
+    <Searchbar />
+    user && 
+      profile page
+
+      The profile page will display all information about your profile, and links to view your posts and where you have made comments.
+
+      sign out
+    
+    !user &&
+      sign in
+      sign up
+      
+
+
+The home screen will show short info of the recent posts, title, image(if applicable), and subtitle, and perhaps the first few lines, along with the author.
+Everyone can click on the posts to display the post, and comments. However only signed in users can comment or create posts.
+
+<Landing />
+  <PostSummary /> (with links to full <Posts />)
+
+There will also be a search function, which will allow people to search by keywords to find certain posts, and a side bar which will display information on any upcoming tournaments.
+Users can "post" these tournaments as an option when they create a post, which if it is selected as a tournament post, it will populate the side bar, with a name, and a date / time.
+
+<Sidebar />
+  <Tournament />(link to tournament component)
+
+
+When someone views the tournament, more information on the tournament will populate the page, and an option to apply.
+
+
+
