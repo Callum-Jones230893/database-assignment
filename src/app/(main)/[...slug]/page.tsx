@@ -1,6 +1,6 @@
 import CommentCard from "@/components/comments/CommentCard"
 import NewCommentWrapper from "@/components/comments/NewCommentWrapper"
-import FullPost from "@/components/posts/FullPost"
+import FullPostCard from "@/components/posts/FullPostCard"
 import { getComment, getFullPost } from "@/lib/supabase/queries"
 import { createClient } from "@/lib/supabase/serverClient"
 
@@ -14,10 +14,10 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex flex-col grow w-full">
+      <div className="flex flex-col grow w-4/5">
         {data && 
         <>
-          <FullPost post={data} />
+          <FullPostCard post={data} />
           <CommentCard comment={comment} />
         </>
         }

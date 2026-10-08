@@ -7,7 +7,7 @@ const UserLinks = async () => {
   const {data:{user}, error} = await supabase.auth.getUser()
 
   return (
-    <div className="flex gap-10">
+    <div className="flex justify-evenly min-w-[1/2] gap-10">
       {user
         ? <>
             <div onClick={Logout} className="flex items-center button-secondary h-10">Logout</div>

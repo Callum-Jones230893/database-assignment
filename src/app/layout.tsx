@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import { QueryClientProvider } from "../../providers/queryProvider";
+
+import '@/src/app/globals.css';
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,7 +28,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <QueryClientProvider>
         <body className="min-h-full flex flex-col">
-          {children}
+        <GluestackUIProvider mode="dark">
+            <div className="flex flex-1 flex-col w-full">
+              {children}
+            </div>
+          </GluestackUIProvider>
         </body>
       </QueryClientProvider>
     </html>

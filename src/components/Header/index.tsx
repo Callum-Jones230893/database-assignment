@@ -1,19 +1,23 @@
-import Link from "next/link"
 import UserLinks from "../UserLinks"
 import SearchBar from "../SearchBar"
+import { Link } from "@/components/ui/link"
+import { Heading } from "@/components/ui/heading"
+import { HeaderBox } from "@/components/ui/headerBox/index.web"
 
 const Header = () => {
   return (
-    <header className="flex items-center gap-20 p-5 justify-between border-b-4 border-blue-500">
-      <div className="flex flex-col">
+    <HeaderBox>
+      <div className="flex">
         <Link href="/" className="button hover:scale-110 duration-75">
-          <h1 className="text-2xl">Tournament</h1>
-          <h2 className="text-xl">Generator</h2>
+          <Heading className="text-2xl">Tournament</Heading>
+          <Heading className="text-xl">Generator</Heading>
         </Link>
       </div>
-      <SearchBar />
+      <div className="flex items-center">
+        <SearchBar />
+      </div>
       <UserLinks />
-    </header>
+    </HeaderBox>
   )
 }
 
