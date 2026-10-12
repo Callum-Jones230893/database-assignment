@@ -4,18 +4,13 @@ import z from "zod"
 import { createPostSchema } from "./schemas"
 import { createClient } from "@/lib/supabase/serverClient"
 import { redirect } from "next/navigation"
+import { slugify } from "@/lib/supabase/slugify";
 import { uploadImage } from "@/lib/supabase/upload-image"
-import { slugify } from "@/lib/supabase/slugify"
 
-type EditPostProps = {
-  postData: z.infer<typeof createPostSchema>
-  postId: string
-}
-
-export const EditPost = async({ postData, postId }: EditPostProps) => {
+export const EditPost = async({ postData, postId }: {postData:z.infer<typeof createPostSchema>, postId: string}) => {
   const parsedData = createPostSchema.parse(postData)
   const supabase = await createClient()
-  
+
   const {data, error} = await supabase
     .from("post")
     .select("*")
@@ -38,7 +33,8 @@ export const EditPost = async({ postData, postId }: EditPostProps) => {
   } else {
     imgUrl = data.image
   }
-  
+
+
   const {data: updatedPosts} = await supabase
     .from("post")
     .update({

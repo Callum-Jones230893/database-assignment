@@ -1,12 +1,18 @@
 "use server"
 
 import { createClient } from "@/lib/supabase/serverClient"
-import { redirect } from "next/navigation"
 import { commentSchema } from "./schemas"
 import z from "zod"
-import { uploadImage } from "@/lib/supabase/upload-image"
+import { revalidatePath } from "next/cache"
 
-export const CreateComment = async(commentContent:z.infer<typeof commentSchema>) => {
+export type CreateCommentProps = {
+  commentContent: z.infer<typeof commentSchema>
+  slug: string
+  postId: string
+  parentId: string | null
+}
+
+export const CreateComment = async({commentContent, postId, slug, parentId}: CreateCommentProps) => {
   const supabase = await createClient()
   const validateData = commentSchema.safeParse(commentContent)
 
@@ -20,49 +26,20 @@ export const CreateComment = async(commentContent:z.infer<typeof commentSchema>)
     return { error: "Incorrect form data." }
   }
 
-  const { data: post } = await supabase
-    .from("post")
-    .select("id")
-    .single()
-
-  if (!post) {
-    return { error: "Post not found" }
-  }
-
-  const { data: profile } = await supabase
-    .from("profile")
-    .select("username")
-    .eq("id", user.id)
-    .single()
-
-  if (!profile) {
-    return { error: "Profile not found." }
-  }
-
-  const { content } = validateData.data
-
-  // const imgFile = image.get("image")
-
-  // if(!(imgFile instanceof File) && imgFile !== null && imgFile !== "undefined"){
-  //   throw Error ("Image is not a valid format, please try again.")
-  // }
-
-  // const imgUrl = (imgFile && imgFile !== "undefined") ? await uploadImage(imgFile as File) : null
-
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("comments")
     .insert({
-      post_id: post.id,
+      post_id: postId,
+      parent_id: parentId,
       commenter: user.id,
-      content: content,
-      // image: z.instanceof(FormData).optional()
-    })
-    .select("content")
+      content: validateData.data.content,
+  })
 
   if (error) {
     console.log(error.message)
     return { error: "Couldn't comment, please try again later." }
   }
-
-  redirect("/")
+  
+  revalidatePath(`/${slug}`)
+  return { success: true }
 }

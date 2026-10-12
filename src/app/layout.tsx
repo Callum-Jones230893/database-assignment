@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { QueryClientProvider } from "../../providers/queryProvider";
+import { Toaster } from "sonner";
 
 import '@/src/app/globals.css';
 import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <QueryClientProvider>
         <body className="min-h-full flex flex-col">
+        <Toaster />
         <GluestackUIProvider mode="dark">
             <div className="flex flex-1 flex-col w-full">
               {children}

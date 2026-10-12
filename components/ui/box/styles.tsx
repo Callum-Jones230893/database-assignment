@@ -7,4 +7,10 @@ const baseStyle = isWeb
 
 export const boxStyle = tva({
   base: baseStyle,
+  variants: {
+    type: {
+      'header-box': 'flex justify-between z-0 border-b-2 bg-transparent p-10',
+      'search-box': 'flex w-150'
+    }
+  }
 });

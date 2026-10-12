@@ -6,6 +6,7 @@ import { createPostSchema } from "./schemas"
 import z from "zod"
 import { slugify } from "@/lib/supabase/slugify"
 import { uploadImage } from "@/lib/supabase/upload-image"
+import { revalidatePath } from "next/cache"
 
 export const CreatePost = async(postContent:z.infer<typeof createPostSchema>) => {
   const supabase = await createClient()
@@ -35,7 +36,7 @@ export const CreatePost = async(postContent:z.infer<typeof createPostSchema>) =>
 
   const slug = slugify(title)
 
-  const imgFile = image!.get("image")
+  const imgFile = image?.get("image")
 
   if(!(imgFile instanceof File) && imgFile !== null && imgFile !== "undefined"){
     throw Error ("Image is not a valid format, please try again.")
@@ -60,5 +61,6 @@ export const CreatePost = async(postContent:z.infer<typeof createPostSchema>) =>
     return { error: "Couldn't create post, please try again later." }
   }
 
-  redirect("/")
+  revalidatePath(`/${slug}`)
+  redirect(`/${slug}`)
 }

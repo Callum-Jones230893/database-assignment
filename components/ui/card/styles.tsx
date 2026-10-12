@@ -8,7 +8,8 @@ export const cardStyle = tva({
     size: {
       lg: 'p-6',
       default: 'w-4/5 my-5 p-4 gap-6',
-      sm: 'p-3 gap-3',
+      sm: 'w-full mt-2 p-4 gap-3',
+      nested: 'mt-1 p-3 w-4/5 ml-auto'
     },
   },
   defaultVariants: {

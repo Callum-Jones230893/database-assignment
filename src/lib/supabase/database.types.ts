@@ -101,7 +101,7 @@ export type Database = {
       }
       comments: {
         Row: {
-          commenter: string | null
+          commenter: string
           content: string
           created_at: string
           deleted: boolean
@@ -112,7 +112,7 @@ export type Database = {
           title: string | null
         }
         Insert: {
-          commenter?: string | null
+          commenter?: string
           content: string
           created_at?: string
           deleted?: boolean
@@ -123,7 +123,7 @@ export type Database = {
           title?: string | null
         }
         Update: {
-          commenter?: string | null
+          commenter?: string
           content?: string
           created_at?: string
           deleted?: boolean

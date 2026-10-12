@@ -1,28 +1,50 @@
 "use client"
 
+import { Card } from "@/components/ui/card/index.web"
 import { CommentType } from "@/lib/supabase/queries"
-import { useState } from "react"
+import NewCommentWrapper from "../NewCommentWrapper"
+import { User } from "@supabase/auth-js"
+import DeleteCommentButton from "../DeleteCommentButton"
 
-type CommentProps = {
-  comment: CommentType | null
+export type MappedCommentType = {
+  id: string;
+  parent_id: string | null;
+  content: string;
+  created_at: string;
+  commenter: {
+  id: string;
+  username: string;
+  }
 }
 
-const CommentCard = ({ comment }: CommentProps) => {
-  const [parentId, setParentId] = useState<string | null>(null)
+type CommentProps = {
+  isAuthor: boolean
+  userId: string | null
+  postId: string
+  comment: MappedCommentType | null
+  slug: string
+  user: User | null
+}
 
-  const handleClick = {
-    // setParentId()
-  }
-
+const CommentCard = ({ comment, isAuthor, userId, postId, slug, user }: CommentProps) => {
   return (
-    <div className="flex flex-col items-center my-[5%]">
-      {comment && comment.commenter && (
-        <div className="border border-black p-4 mb-4 rounded-2xl w-1/2">
-          <p>{comment.content}</p>
-          <p>{comment.commenter.username}</p>
+    <div className="flex flex-col items-start">
+      {comment &&
+        <div>
+          {!comment.parent_id && 
+          <Card size="sm" >
+            <div className="flex w-full justify-between">
+              <p>{comment.content}</p>
+              <p>{comment.commenter.username}</p>
+            </div>
+            {isAuthor || (userId === comment.commenter.id) ? <DeleteCommentButton id={comment.id} slug={slug} /> : ""}
+            {user && comment && 
+            <div>
+              <NewCommentWrapper postId={postId} slug={slug} parentId={comment.id} />
+            </div>}
+          </Card>}
         </div>
-      )}
-      <div className="">Reply</div>
+      }
     </div>
   )
 }

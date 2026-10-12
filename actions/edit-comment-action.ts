@@ -13,7 +13,7 @@ type EditCommentProps = {
   commentId: string
 }
 
-export const EditPost = async({ commentData, commentId }: EditCommentProps) => {
+export const EditComment = async({ commentData, commentId }: EditCommentProps) => {
   const parsedData = commentSchema.parse(commentData)
   const supabase = await createClient()
   

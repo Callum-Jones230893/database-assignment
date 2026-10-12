@@ -8,9 +8,7 @@ export const loginSchema = z.object({
 })
 
 export const createPostSchema = z.object({
-  // author: z.string(),
-  // category: z.string(),
-  title: z.string(),
+  title: z.string().min(6),
   content: z.string().optional(),
   image: z.instanceof(FormData).optional()
 })

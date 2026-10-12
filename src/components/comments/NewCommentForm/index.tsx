@@ -4,16 +4,26 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { commentSchema } from "../../../../actions/schemas"
+import z from "zod"
 import { CreateComment } from "../../../../actions/comment-action"
 import { Dispatch, SetStateAction } from "react"
 
-const NewCommentForm = ({ setNewComment }: {setNewComment: Dispatch<SetStateAction<boolean>>}) => {
-  const { register, handleSubmit, formState: { errors }} = useForm({
+type CommentValues = z.infer<typeof commentSchema>
+
+type CommentFormProps = {
+  postId: string
+  slug: string
+  parentId: string | null
+  setNewComment: Dispatch<SetStateAction<boolean>>
+}
+
+const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormProps) => {
+  const { register, handleSubmit, formState: { errors }} = useForm<CommentValues>({
     resolver: zodResolver(commentSchema)
   })
 
   const { mutate, error } = useMutation({
-    mutationFn: CreateComment,
+    mutationFn: (values: CommentValues) => CreateComment({ commentContent: values, postId, slug, parentId }),
   })
 
   const handleClick = () => {

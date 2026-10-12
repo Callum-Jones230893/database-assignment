@@ -15,7 +15,7 @@ export const getFullPost = async (slug: string) => {
   const supabase = createClient()
   return await supabase
     .from("post")
-    .select(`id, title, content, author("id", "username")`)
+    .select(`id, title, content, image, author("id", "username")`)
     .eq(`slug`, slug)
     .single()
 }
@@ -32,10 +32,11 @@ export const searchPosts = async (searchTerm: string) => {
 
 export type CommentType = QueryData<ReturnType<typeof getComment>>
 
-export const getComment = async () => {
-  const supabase = createClient()
-  return await supabase
+export const getComment = async (postId: string) => {
+  const supabase = await createClient()
+  return supabase
     .from("comments")
-    .select(`id, content, commenter("username")`)
-    .single()
+    .select(`id, parent_id, content, created_at, commenter("id", "username")`)
+    .eq("post_id", postId)
+    .order("created_at", { ascending: false })
 }
