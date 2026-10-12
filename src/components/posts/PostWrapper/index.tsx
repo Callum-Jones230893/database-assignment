@@ -20,7 +20,7 @@ const PostWrapper = ({ data, comments, user, slug, isAuthor }: PostWrapperProps)
         {data && 
           <>
             <FullPostCard post={data} />
-            <CommentWrapper comments={comments} isAuthor={isAuthor} userId={user && user.id} postId={data!.id} slug={slug} user={user} />
+            {comments && <CommentWrapper comments={comments} isAuthor={isAuthor} userId={user && user.id} postId={data!.id} slug={slug} user={user} />}
           </>
         }
       </div>

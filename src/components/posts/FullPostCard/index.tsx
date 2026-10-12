@@ -1,4 +1,4 @@
-import { Card } from '@/components/ui/card';
+
 import { FullPostType } from '@/lib/supabase/queries';
 
 type FullPostCardProps = {
@@ -8,9 +8,9 @@ type FullPostCardProps = {
 
 const FullPostCard = ({ post }: FullPostCardProps) => {
   return (
-    <Card className="w-full" size="default">
+    <div className="flex flex-col my-[2%]">
       {post && (
-        <div className="p-4 rounded-2xl w-8/10">
+        <div className="border-2 border-orange-500 p-4 mb-4 rounded-2xl shadow-sm shadow-orange-400 min-h-[5%]">
           <h3 className="font-bold text-2xl">{post.title}</h3>
           <p className="text-right">Posted by {post.author.username}</p>
           <div>
@@ -18,7 +18,7 @@ const FullPostCard = ({ post }: FullPostCardProps) => {
           </div>
         </div>
       )}
-    </Card>
+    </div>
   );
 }
 

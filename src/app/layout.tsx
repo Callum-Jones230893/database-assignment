@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { QueryClientProvider } from "../../providers/queryProvider";
 import { Toaster } from "sonner";
-
 import '@/src/app/globals.css';
-import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
+import Footer from "@/components/Footer"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,18 +24,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <QueryClientProvider>
-        <body className="min-h-full flex flex-col">
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+      <body className="min-h-screen flex flex-col bg-gray-900 text-orange-200">
+        <QueryClientProvider>
         <Toaster />
-        <GluestackUIProvider mode="dark">
-            <div className="flex flex-1 flex-col w-full">
-              {children}
-            </div>
-          </GluestackUIProvider>
-        </body>
-      </QueryClientProvider>
+          <div className="flex flex-1 flex-col w-full">
+            {children}
+          </div>
+          <Footer />
+        </QueryClientProvider>
+      </body>
     </html>
   );
 }

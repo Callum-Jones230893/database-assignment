@@ -22,8 +22,8 @@ const SearchBar = () => {
 
   return (
     <div className="relative">
-      <div className="flex w-[10%] items-center">
-        <div className="border border-pacifika">
+      <div className="flex w-[10%] items-center gap-5">
+        <div className="">
           <input
             placeholder="Search posts"
             value={search}

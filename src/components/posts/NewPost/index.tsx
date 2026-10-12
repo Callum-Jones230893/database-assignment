@@ -21,9 +21,6 @@ const NewPost = () => {
 
   return (
     <div className="flex flex-col">
-      <h2>
-        Create a post
-      </h2>
       <form onSubmit={handleSubmit((values) => {
         const newImage = new FormData()
         if (values.image) {

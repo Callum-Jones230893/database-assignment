@@ -2,7 +2,6 @@
 
 import { User } from "@supabase/auth-js"
 import { MappedCommentType } from "../CommentCard"
-import { Card } from "@/components/ui/card"
 import DeleteCommentButton from "../DeleteCommentButton"
 import NewCommentWrapper from "../NewCommentWrapper"
 
@@ -19,18 +18,17 @@ const NestedComment = ({ comment, isAuthor, userId, postId, slug, user }: Commen
   return (
     <>
       {comment?.parent_id &&
-        <div>
-          <Card size="nested" >
-            <div className="flex w-full justify-between">
+        <div className="flex flex-col items-end">
+          <div className="w-7/10">
+            <div className="border border-orange-400 p-4 mb-4 rounded-2xl w-full">
               <p>{comment.content}</p>
               <p>{comment.commenter.username}</p>
+              <div className="flex justify-end">
+                {isAuthor || (userId === comment.commenter.id) ? <DeleteCommentButton id={comment.id} slug={slug} /> : ""}
+                {user && comment && <NewCommentWrapper postId={postId} slug={slug} parentId={comment.id} />}
+              </div>
             </div>
-            {isAuthor || (userId === comment.commenter.id) ? <DeleteCommentButton id={comment.id} slug={slug} /> : ""}
-            {user && comment && 
-            <div>
-              <NewCommentWrapper postId={postId} slug={slug} parentId={comment.id} />
-            </div>}
-          </Card>
+          </div>
         </div>
       }
     </>

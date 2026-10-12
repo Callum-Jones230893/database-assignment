@@ -1,7 +1,5 @@
 "use client"
 
-import { Card } from "@/components/ui/card/index.web"
-import { CommentType } from "@/lib/supabase/queries"
 import NewCommentWrapper from "../NewCommentWrapper"
 import { User } from "@supabase/auth-js"
 import DeleteCommentButton from "../DeleteCommentButton"
@@ -28,22 +26,21 @@ type CommentProps = {
 
 const CommentCard = ({ comment, isAuthor, userId, postId, slug, user }: CommentProps) => {
   return (
-    <div className="flex flex-col items-start">
+    <div className="flex flex-col items-end">
       {comment &&
-        <div>
+        <>
           {!comment.parent_id && 
-          <Card size="sm" >
-            <div className="flex w-full justify-between">
+          <div className="w-9/10">
+            <div className="border border-orange-400 p-4 mb-4 rounded-2xl w-full">
               <p>{comment.content}</p>
               <p>{comment.commenter.username}</p>
+              <div className="flex justify-end">
+                {isAuthor || (userId === comment.commenter.id) ? <DeleteCommentButton id={comment.id} slug={slug} /> : ""}
+                {user && comment && <NewCommentWrapper postId={postId} slug={slug} parentId={comment.id} />}
+              </div>
             </div>
-            {isAuthor || (userId === comment.commenter.id) ? <DeleteCommentButton id={comment.id} slug={slug} /> : ""}
-            {user && comment && 
-            <div>
-              <NewCommentWrapper postId={postId} slug={slug} parentId={comment.id} />
-            </div>}
-          </Card>}
-        </div>
+          </div>}
+        </>
       }
     </div>
   )

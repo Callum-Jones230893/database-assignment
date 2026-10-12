@@ -3,8 +3,7 @@
 import { getLandingPosts, LandingPostType } from "@/lib/supabase/queries"
 import { useQuery } from "@tanstack/react-query"
 import { createClient } from "@/lib/supabase/browserClient"
-import { Link } from "@/components/ui/link"
-import { Card } from "@/components/ui/card/index.web"
+import Link from "next/link"
 
 type LandingPostProps = {
   posts: LandingPostType | null
@@ -25,21 +24,21 @@ const LandingPosts = ({ posts }: LandingPostProps) => {
   })
 
   return (
-    <>
+    <div className="flex-col grow w-8/10">
       {data &&
         data.map((post) => (
           <Link
             href={`/${post.slug}`}
             key={post.id}
-            className="flex items-center p-4 mb-4 rounded-2xl w-4/5"
+            className="border-2 border-orange-500 p-4 block mb-4 rounded-2xl shadow-sm shadow-orange-400 min-h-[5%]"
           >
-            <Card size="default">
+            <div>
                 <h3 className="font-bold text-2xl">{post.title}</h3>
                 <p className="text-right">Posted by {post.author.username}</p>
-            </Card>
+            </div>
           </Link>
         ))}
-    </>
+    </div>
   )
 }
 

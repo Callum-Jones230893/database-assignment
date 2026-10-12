@@ -3,7 +3,7 @@ import NewPost from "@/components/posts/NewPost"
 const CreatePostPage = () => {
   return (
     <div>
-      <h2>Create Post</h2>
+      <h2 className="subtitle">Create Post</h2>
       <NewPost />
     </div>
   )
