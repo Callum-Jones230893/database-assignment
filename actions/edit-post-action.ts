@@ -21,17 +21,26 @@ export const EditPost = async({ postData, postId }: {postData:z.infer<typeof cre
     throw new Error ("post doesnt exist")
   }
   
-  const imgFile = postData.image?.get("image")
+  const imgs = parsedData.image
 
-  let imgUrl
+  let updatedImages
 
-  if (imgFile !== "undefined") {
-    if(!(imgFile instanceof File) && imgFile !== null && imgFile !== "undefined"){
-      throw Error ("Image is not a valid format, please try again.")
+  if (imgs) {
+    let newImageFiles: File[] = []
+    
+    if (Array.isArray(imgs)) {
+      newImageFiles = imgs.filter((item): item is File => item instanceof File)
+    } else if (imgs instanceof File) {
+      newImageFiles = [imgs]
     }
-    imgUrl = imgFile ? await uploadImage(imgFile as File) : null
+
+    if (newImageFiles.length > 0) {
+      updatedImages = await uploadImage(newImageFiles)
+    } else {
+      updatedImages = data.image || []
+    }
   } else {
-    imgUrl = data.image
+    updatedImages = data.image || []
   }
 
 
@@ -40,7 +49,7 @@ export const EditPost = async({ postData, postId }: {postData:z.infer<typeof cre
     .update({
       ...parsedData,
       slug: slugify(parsedData.title),
-      image: imgUrl
+      image: updatedImages
     })
     .eq("id", postId)
     .select("slug")

@@ -17,13 +17,23 @@ type CommentFormProps = {
   setNewComment: Dispatch<SetStateAction<boolean>>
 }
 
-const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormProps) => {
-  const { register, handleSubmit, formState: { errors }} = useForm<CommentValues>({
-    resolver: zodResolver(commentSchema)
+const NewCommentForm = ({
+  postId,
+  slug,
+  setNewComment,
+  parentId,
+}: CommentFormProps) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CommentValues>({
+    resolver: zodResolver(commentSchema),
   })
 
   const { mutate, error } = useMutation({
-    mutationFn: (values: CommentValues) => CreateComment({ commentContent: values, postId, slug, parentId }),
+    mutationFn: (values: CommentValues) =>
+      CreateComment({ commentContent: values, postId, slug, parentId }),
   })
 
   const handleClick = () => {
@@ -32,15 +42,24 @@ const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormPr
 
   return (
     <div className="">
-      <form onSubmit={handleSubmit((values) => mutate(values))} className="flex flex-col items-center gap-10 w-md m-auto p-10 border-2 shadow-lg shadow-blue-300 border-blue-500 rounded-2xl mb-4">
-        <textarea {...register("content")} placeholder="Content..." className="border border-blue-500 rounded-md p-2 w-9/10"></textarea>
+      <form
+        onSubmit={handleSubmit((values) => mutate(values))}
+        className="flex flex-col items-center gap-10 w-md m-auto p-10 border-2 shadow-lg shadow-blue-300 border-blue-500 rounded-2xl mb-4"
+      >
+        <textarea
+          {...register("content")}
+          placeholder="Content..."
+          className="border border-blue-500 rounded-md p-2 w-9/10"
+        ></textarea>
         {errors.content && <p>{errors.content.message}</p>}
-        
+
         <div className="flex justify-between w-9/10">
           <button className="button cursor-pointer">Comment</button>
           {error && <p>{error.message}</p>}
 
-          <div className="button cursor-pointer" onClick={handleClick}>Cancel</div>
+          <div className="button cursor-pointer" onClick={handleClick}>
+            Cancel
+          </div>
         </div>
       </form>
     </div>

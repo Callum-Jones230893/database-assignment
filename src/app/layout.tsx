@@ -28,7 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       >
       <body className="min-h-screen flex flex-col bg-gray-900 text-orange-200">
         <QueryClientProvider>
-        <Toaster />
+          <Toaster />
           <div className="flex flex-1 flex-col w-full">
             {children}
           </div>

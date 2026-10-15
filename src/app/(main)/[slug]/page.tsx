@@ -17,15 +17,9 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <>
-      <div className={`flex flex-col`}>
+      <div className={`flex flex-col gap-10`}>
         {/* create as popup */}
         {data && <PostWrapper comments={comments} user={user} data={data} slug={slug} isAuthor={isAuthor} /> }
-        {isAuthor && 
-          <div className="flex gap-10">
-            <DeleteButton id={data!.id} />
-            <Link href={`/${slug}/edit`} className="button cursor-pointer">Edit Post</Link>
-          </div>
-        }
       </div>
     </>
   )

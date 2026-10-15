@@ -5,8 +5,6 @@ import { commentSchema } from "./schemas"
 import { createClient } from "@/lib/supabase/serverClient"
 import { redirect } from "next/navigation"
 import { uploadImage } from "@/lib/supabase/upload-image"
-import { slugify } from "@/lib/supabase/slugify"
-import { CreateComment } from "./comment-action"
 
 type EditCommentProps = {
   commentData: z.infer<typeof commentSchema>
@@ -35,7 +33,7 @@ export const EditComment = async({ commentData, commentId }: EditCommentProps) =
     if(!(imgFile instanceof File) && imgFile !== null && imgFile !== "undefined"){
       throw Error ("Image is not a valid format, please try again.")
     }
-    imgUrl = imgFile ? await uploadImage(imgFile as File) : null
+    imgUrl = imgFile ? await uploadImage(imgFile as File[]) : null
   } else {
     imgUrl = data.image
   }

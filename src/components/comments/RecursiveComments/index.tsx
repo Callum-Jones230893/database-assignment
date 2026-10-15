@@ -14,7 +14,15 @@ type NestedCommentsProps = {
   postId: string
 }
 
-const NestedComments = ({ comments, parentId = null, slug, user, isAuthor, userId, postId }: NestedCommentsProps) => {
+const NestedComments = ({
+  comments,
+  parentId = null,
+  slug,
+  user,
+  isAuthor,
+  userId,
+  postId,
+}: NestedCommentsProps) => {
   const childComments = comments.filter((item) => item.parent_id === parentId)
 
   if (childComments.length === 0) return null
@@ -29,18 +37,38 @@ const NestedComments = ({ comments, parentId = null, slug, user, isAuthor, userI
                 <p>{comment.content}</p>
                 <p>{comment.commenter.username}</p>
                 <div className="flex justify-end">
-                  {isAuthor || (userId === comment.commenter.id) ? <DeleteCommentButton id={comment.id} slug={slug} /> : ""}
-                  {user && comment && <NewCommentWrapper postId={postId} slug={slug} parentId={comment.id} />}
+                  <div>
+                    {isAuthor || userId === comment.commenter.id ? (
+                      <DeleteCommentButton id={comment.id} slug={slug} />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  {/* make reply form a popup */}
+                  {user && comment && (
+                    <NewCommentWrapper
+                      postId={postId}
+                      slug={slug}
+                      parentId={comment.id}
+                    />
+                  )}
                 </div>
               </div>
             </div>
-            <NestedComments comments={comments} parentId={comment.id} isAuthor={isAuthor} userId={user && userId} postId={postId} slug={slug} user={user} />
+            <NestedComments
+              comments={comments}
+              parentId={comment.id}
+              isAuthor={isAuthor}
+              userId={user && userId}
+              postId={postId}
+              slug={slug}
+              user={user}
+            />
           </li>
         ))}
       </ul>
     </div>
   )
-} 
+}
 
 export default NestedComments
-

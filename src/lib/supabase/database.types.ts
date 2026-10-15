@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.5"
+    PostgrestVersion: "14.17"
   }
   public: {
     Tables: {
@@ -51,6 +51,7 @@ export type Database = {
           player_one: string | null
           player_two: string | null
           time_slot: string
+          tournament_id: string
           winner: string | null
         }
         Insert: {
@@ -62,6 +63,7 @@ export type Database = {
           player_one?: string | null
           player_two?: string | null
           time_slot?: string
+          tournament_id: string
           winner?: string | null
         }
         Update: {
@@ -73,6 +75,7 @@ export type Database = {
           player_one?: string | null
           player_two?: string | null
           time_slot?: string
+          tournament_id?: string
           winner?: string | null
         }
         Relationships: [
@@ -97,11 +100,18 @@ export type Database = {
             referencedRelation: "profile"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "brackets_tournament_id_fkey"
+            columns: ["tournament_id"]
+            isOneToOne: false
+            referencedRelation: "tournament"
+            referencedColumns: ["id"]
+          },
         ]
       }
       comments: {
         Row: {
-          commenter: string
+          commenter: string | null
           content: string
           created_at: string
           deleted: boolean
@@ -112,7 +122,7 @@ export type Database = {
           title: string | null
         }
         Insert: {
-          commenter?: string
+          commenter?: string | null
           content: string
           created_at?: string
           deleted?: boolean
@@ -123,7 +133,7 @@ export type Database = {
           title?: string | null
         }
         Update: {
-          commenter?: string
+          commenter?: string | null
           content?: string
           created_at?: string
           deleted?: boolean
@@ -159,7 +169,7 @@ export type Database = {
           deleted: boolean
           deleted_at: string | null
           id: string
-          image: string | null
+          image: string[] | null
           slug: string
           title: string
         }
@@ -171,7 +181,7 @@ export type Database = {
           deleted?: boolean
           deleted_at?: string | null
           id?: string
-          image?: string | null
+          image?: string[] | null
           slug: string
           title: string
         }
@@ -183,7 +193,7 @@ export type Database = {
           deleted?: boolean
           deleted_at?: string | null
           id?: string
-          image?: string | null
+          image?: string[] | null
           slug?: string
           title?: string
         }
@@ -229,6 +239,45 @@ export type Database = {
           username?: string
         }
         Relationships: []
+      }
+      tournament: {
+        Row: {
+          applicant_id: string | null
+          created_at: string
+          id: string
+          tournament_name: string
+          user_id: string | null
+        }
+        Insert: {
+          applicant_id?: string | null
+          created_at?: string
+          id?: string
+          tournament_name: string
+          user_id?: string | null
+        }
+        Update: {
+          applicant_id?: string | null
+          created_at?: string
+          id?: string
+          tournament_name?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tournament_applicant_id_fkey"
+            columns: ["applicant_id"]
+            isOneToOne: false
+            referencedRelation: "applicants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tournament_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

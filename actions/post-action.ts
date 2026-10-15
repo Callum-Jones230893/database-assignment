@@ -36,23 +36,26 @@ export const CreatePost = async(postContent:z.infer<typeof createPostSchema>) =>
 
   const slug = slugify(title)
 
-  const imgFile = image?.get("image")
+  let imgFiles: File[] = []
 
-  if(!(imgFile instanceof File) && imgFile !== null && imgFile !== "undefined"){
-    throw Error ("Image is not a valid format, please try again.")
+  if (image) {
+    if (Array.isArray(image)) {
+      imgFiles = image.filter((item): item is File => item instanceof File)
+    } else if (image instanceof File) {
+      imgFiles = [image]
+    }
   }
 
-  const imgUrl = (imgFile && imgFile !== "undefined") ? await uploadImage(imgFile as File) : null
+  const imgUrls = imgFiles.length > 0 ? await uploadImage(imgFiles) : null
 
   const { data, error } = await supabase
     .from("post")
     .insert({
       author: user.id,
-      // category: category,
       title: title,
       content: content,
       slug: slug,
-      image: imgUrl
+      image: imgUrls
     })
     .select("title, content")
 

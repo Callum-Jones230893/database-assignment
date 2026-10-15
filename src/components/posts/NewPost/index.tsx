@@ -9,7 +9,17 @@ import ErrorMessage from "@/components/ErrorMessage"
 import z from "zod"
 
 const NewPost = () => {
-  const postImageSchema = createPostSchema.omit({image: true}).extend({image: z.unknown().transform(value => {return value as FileList}).optional()})
+  const postImageSchema = createPostSchema.omit({ image: true }).extend({
+    image: z
+      .unknown()
+      .transform((value) => {
+        if (value instanceof FileList) {
+          return Array.from(value)
+        }
+        return [];
+      })
+      .optional()
+  })
 
   const { register, handleSubmit, formState: {errors} } = useForm({
     resolver: zodResolver(postImageSchema)
@@ -29,7 +39,7 @@ const NewPost = () => {
         mutate({
           title: values.title,
           content: values.content,
-          image: newImage
+          image: values.image && values.image.length > 0 ? values.image : undefined
         })
       })} 
         className="flex flex-col w-md m-auto p-10 border border-sushi rounded-2xl mb-4">
@@ -42,7 +52,7 @@ const NewPost = () => {
         {errors.content && <ErrorMessage error={errors.content.message!} />}
 
         <label htmlFor="image">Insert an image</label>
-        <input type="file" {...register("image")} className="input" />
+        <input type="file" multiple {...register("image")} className="input" />
         {errors.image && <ErrorMessage error={errors.image.message!} />}
 
         <button className="button cursor-pointer">Submit</button>

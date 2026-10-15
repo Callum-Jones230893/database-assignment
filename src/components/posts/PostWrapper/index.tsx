@@ -1,4 +1,3 @@
-import CommentCard from "@/components/comments/CommentCard"
 import NewCommentWrapper from "@/components/comments/NewCommentWrapper"
 import FullPostCard from "../FullPostCard"
 import { CommentType, FullPostType } from "@/lib/supabase/queries"
@@ -19,7 +18,7 @@ const PostWrapper = ({ data, comments, user, slug, isAuthor }: PostWrapperProps)
       <div className="flex flex-col grow w-4/5">
         {data && 
           <>
-            <FullPostCard post={data} />
+            <FullPostCard post={data} slug={slug} isAuthor={isAuthor} />
             {comments && <CommentWrapper comments={comments} isAuthor={isAuthor} userId={user && user.id} postId={data!.id} slug={slug} user={user} />}
           </>
         }

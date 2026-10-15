@@ -18,8 +18,19 @@ const NewCommentWrapper = ({ postId, slug, parentId }: NewCommentType) => {
 
   return (
     <div className="flex flex-col items-center">
-      {!newComment && <div className="button" onClick={handleClick}>Comment</div>}
-      {newComment && <NewCommentForm setNewComment={setNewComment} postId={postId} slug={slug} parentId={parentId} />}
+      {!newComment && (
+        <div className="button" onClick={handleClick}>
+          Comment
+        </div>
+      )}
+      {newComment && (
+        <NewCommentForm
+          setNewComment={setNewComment}
+          postId={postId}
+          slug={slug}
+          parentId={parentId}
+        />
+      )}
     </div>
   )
 }

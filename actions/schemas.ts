@@ -10,12 +10,12 @@ export const loginSchema = z.object({
 export const createPostSchema = z.object({
   title: z.string().min(6),
   content: z.string().optional(),
-  image: z.instanceof(FormData).optional()
+  image: z.union([z.instanceof(File), z.array(z.instanceof(File))]).optional()
 })
 
 export const commentSchema = z.object({
   content: z.string(),
-  image: z.instanceof(FormData).optional()
+  image: z.union([z.instanceof(File), z.array(z.instanceof(File))]).optional()
 })
 
 export const signUpSchema = z.object({
