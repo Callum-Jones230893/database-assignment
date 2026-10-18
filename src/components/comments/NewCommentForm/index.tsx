@@ -41,10 +41,10 @@ const NewCommentForm = ({
   }
 
   return (
-    <div className="">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
       <form
         onSubmit={handleSubmit((values) => mutate(values))}
-        className="flex flex-col items-center gap-10 w-md m-auto p-10 border-2 shadow-lg shadow-blue-300 border-blue-500 rounded-2xl mb-4"
+        className="flex flex-col items-center gap-10 w-full max-w-md p-10 border-2 shadow-lg shadow-blue-300 border-blue-500 rounded-2xl bg-gray-800/90"
       >
         <textarea
           {...register("content")}

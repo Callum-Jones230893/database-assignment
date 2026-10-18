@@ -1,3 +1,5 @@
+"use"
+
 import NewCommentWrapper from "@/components/comments/NewCommentWrapper"
 import FullPostCard from "../FullPostCard"
 import { CommentType, FullPostType } from "@/lib/supabase/queries"

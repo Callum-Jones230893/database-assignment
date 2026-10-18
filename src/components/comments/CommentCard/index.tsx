@@ -17,11 +17,11 @@ export type MappedCommentType = {
 
 type CommentProps = {
   isAuthor: boolean
-  userId: string | null
+  userId: string
   postId: string
   comment: MappedCommentType | null
   slug: string
-  user: User | null
+  user: User
 }
 
 const CommentCard = ({

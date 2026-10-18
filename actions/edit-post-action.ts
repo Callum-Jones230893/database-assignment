@@ -21,17 +21,17 @@ export const EditPost = async({ postData, postId }: {postData:z.infer<typeof cre
     throw new Error ("post doesnt exist")
   }
   
-  const imgs = parsedData.image
+  const images = parsedData.image
 
   let updatedImages
 
-  if (imgs) {
+  if (images) {
     let newImageFiles: File[] = []
     
-    if (Array.isArray(imgs)) {
-      newImageFiles = imgs.filter((item): item is File => item instanceof File)
-    } else if (imgs instanceof File) {
-      newImageFiles = [imgs]
+    if (Array.isArray(images)) {
+      newImageFiles = images.filter((item): item is File => item instanceof File)
+    } else if (images instanceof File) {
+      newImageFiles = [images]
     }
 
     if (newImageFiles.length > 0) {

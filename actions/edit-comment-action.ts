@@ -4,16 +4,16 @@ import z from "zod"
 import { commentSchema } from "./schemas"
 import { createClient } from "@/lib/supabase/serverClient"
 import { redirect } from "next/navigation"
-import { uploadImage } from "@/lib/supabase/upload-image"
 
 type EditCommentProps = {
   commentData: z.infer<typeof commentSchema>
   commentId: string
+  slug: string
 }
 
-export const EditComment = async({ commentData, commentId }: EditCommentProps) => {
-  const parsedData = commentSchema.parse(commentData)
+export const EditComment = async({ commentData, commentId, slug }: EditCommentProps) => {
   const supabase = await createClient()
+  const parsedData = commentSchema.parse(commentData)
   
   const {data, error} = await supabase
     .from("comments")
@@ -25,29 +25,15 @@ export const EditComment = async({ commentData, commentId }: EditCommentProps) =
     throw new Error ("Comment doesnt exist")
   }
   
-  const imgFile = commentData.image?.get("image")
-
-  let imgUrl
-
-  if (imgFile !== "undefined") {
-    if(!(imgFile instanceof File) && imgFile !== null && imgFile !== "undefined"){
-      throw Error ("Image is not a valid format, please try again.")
-    }
-    imgUrl = imgFile ? await uploadImage(imgFile as File[]) : null
-  } else {
-    imgUrl = data.image
-  }
-  
   const {data: updatedComments} = await supabase
     .from("comments")
     .update({
       ...parsedData,
-      image: imgUrl
     })
     .eq("id", commentId)
     .select("slug")
     .single()
     .throwOnError()
 
-  redirect(`/${updatedComments.slug}`)
+  redirect(`/${slug}`)
 }

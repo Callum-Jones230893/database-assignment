@@ -1,8 +1,8 @@
 import { CommentType } from "@/lib/supabase/queries"
-import { MappedCommentType } from "../CommentCard"
 import DeleteCommentButton from "../DeleteCommentButton"
 import { User } from "@supabase/auth-js"
 import NewCommentWrapper from "../NewCommentWrapper"
+import { MappedCommentType } from "../CommentCard"
 
 type NestedCommentsProps = {
   comments: CommentType
