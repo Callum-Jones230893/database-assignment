@@ -6,9 +6,10 @@ import { useForm } from "react-hook-form"
 import { commentSchema } from "../../../../actions/schemas"
 import z from "zod"
 import { CreateComment } from "../../../../actions/comment-action"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
+import ConfirmChoice from "@/components/ConfirmChoice"
 
-type CommentValues = z.infer<typeof commentSchema>
+export type CommentValues = z.infer<typeof commentSchema>
 
 type CommentFormProps = {
   postId: string
@@ -17,34 +18,44 @@ type CommentFormProps = {
   setNewComment: Dispatch<SetStateAction<boolean>>
 }
 
-const NewCommentForm = ({
-  postId,
-  slug,
-  setNewComment,
-  parentId,
-}: CommentFormProps) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<CommentValues>({
+const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormProps) => {
+  const [confirm, setConfirm] = useState<boolean>(false)
+  const [storedValues, setStoredValues] = useState<CommentValues | null>(null)
+
+  const { register, handleSubmit, formState: { errors }, } = useForm<CommentValues>({
     resolver: zodResolver(commentSchema),
   })
 
   const { mutate, error } = useMutation({
     mutationFn: (values: CommentValues) =>
       CreateComment({ commentContent: values, postId, slug, parentId }),
-  })
+      onSuccess: () => {
+        setConfirm(false)
+        setStoredValues(null)
+        setNewComment(false)
+      }
+    }
+  )
+
+  const handlePreConfirmation = (values: CommentValues) => {
+    setStoredValues(values)
+    setConfirm(true)
+  }
+
+  const handleConfirmation = () => {
+    storedValues && mutate(storedValues)
+  }
 
   const handleClick = () => {
     setNewComment(false)
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={handleClick}>
       <form
-        onSubmit={handleSubmit((values) => mutate(values))}
-        className="flex flex-col items-center gap-10 w-full max-w-md p-10 border-2 shadow-lg shadow-blue-300 border-blue-500 rounded-2xl bg-gray-800/90"
+        onSubmit={handleSubmit(handlePreConfirmation)}
+        onClick={(e) => e.stopPropagation()}
+        className="flex flex-col items-center gap-10 w-full max-w-md p-10 border-2 shadow-lg shadow-blue-300 border-blue-500 rounded-2xl bg-gray-800/90 z-55"
       >
         <textarea
           {...register("content")}
@@ -61,6 +72,7 @@ const NewCommentForm = ({
             Cancel
           </div>
         </div>
+        <ConfirmChoice handleConfirmation={handleConfirmation} setNewComment={setNewComment} /> 
       </form>
     </div>
   )

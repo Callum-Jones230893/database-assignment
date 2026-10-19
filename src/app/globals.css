@@ -1,15 +1,5 @@
 @import 'tailwindcss';
 
-@config '../../tailwind.config.js';
-
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -25,17 +15,9 @@
 }
 
 .subtitle {
-  @apply
-  text-2xl
-  text-center
-  mb-10
+  @apply text-2xl text-center mb-10;
 }
 
 .button {
-  @apply
-  border
-  border-orange-500
-  rounded-2xl 
-  w-fit 
-  p-2
+  @apply border border-orange-500 rounded-2xl w-fit p-2;
 }
