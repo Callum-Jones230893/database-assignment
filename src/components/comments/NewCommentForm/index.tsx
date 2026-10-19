@@ -21,6 +21,7 @@ type CommentFormProps = {
 const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormProps) => {
   const [confirm, setConfirm] = useState<boolean>(false)
   const [storedValues, setStoredValues] = useState<CommentValues | null>(null)
+  const [confirmOpen, setConfirmOpen] = useState<boolean>(false)
 
   const { register, handleSubmit, formState: { errors }, } = useForm<CommentValues>({
     resolver: zodResolver(commentSchema),
@@ -40,10 +41,13 @@ const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormPr
   const handlePreConfirmation = (values: CommentValues) => {
     setStoredValues(values)
     setConfirm(true)
+    setConfirmOpen(true)
   }
 
+  
   const handleConfirmation = () => {
     storedValues && mutate(storedValues)
+    setConfirmOpen(false)
   }
 
   const handleClick = () => {
@@ -72,7 +76,7 @@ const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormPr
             Cancel
           </div>
         </div>
-        <ConfirmChoice handleConfirmation={handleConfirmation} setNewComment={setNewComment} /> 
+        {confirmOpen && <ConfirmChoice handleConfirmation={handleConfirmation} setNewComment={setNewComment} />}
       </form>
     </div>
   )

@@ -4,6 +4,8 @@ import { User } from "@supabase/auth-js"
 import NewCommentWrapper from "../NewCommentWrapper"
 import { MappedCommentType } from "../CommentCard"
 
+// remove commentcard and move imported type here
+
 type NestedCommentsProps = {
   comments: CommentType
   parentId: string | null

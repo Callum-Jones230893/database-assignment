@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from "react"
-import { CommentValues } from "../comments/NewCommentForm"
 
 type ConfirmChoiceProps = {
   handleConfirmation: Dispatch<SetStateAction<boolean>>
@@ -8,10 +7,10 @@ type ConfirmChoiceProps = {
 
 const ConfirmChoice = ({ handleConfirmation, setNewComment }: ConfirmChoiceProps) => {
   return (
-    <div className="fixed flex-col inset-0 z-50 flex items-center justify-center bg-black/50 p-4 gap-10">
+    <div className="fixed flex-col inset-0 z-55 flex items-center justify-center bg-black/50 p-4 gap-10">
       <p>Would you like to proceed?</p>
-      <div className="flex gap-10">
-        <span onClick={() => handleConfirmation}>Confirm</span>
+      <div className="flex gap-10 z-100">
+        <span onClick={() => handleConfirmation(true)}>Confirm</span>
         <span onClick={() => setNewComment(false)}>Cancel</span>
       </div>
     </div>
