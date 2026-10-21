@@ -1,0 +1,21 @@
+Make modal for confirmation (deletetion, changes etc) 
+
+Delete commentcard and move mapped type
+
+Check that original Poster can delete peoples comments
+
+Add roles - done
+
+Make cascading delete triggers ??
+
+Import bracket library - done
+
+Create tournament display after generation
+
+Add application fields
+
+Add timed function for applicants to populate brackets
+
+Click on bracket winner to move to next
+
+Check error handling and change schemas

@@ -7,7 +7,7 @@ import { commentSchema } from "../../../../actions/schemas"
 import z from "zod"
 import { CreateComment } from "../../../../actions/comment-action"
 import { Dispatch, SetStateAction, useState } from "react"
-import ConfirmChoice from "@/components/ConfirmChoice"
+import ConfirmationModal from "@/components/ConfirmationModal"
 
 export type CommentValues = z.infer<typeof commentSchema>
 
@@ -44,7 +44,6 @@ const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormPr
     setConfirmOpen(true)
   }
 
-  
   const handleConfirmation = () => {
     storedValues && mutate(storedValues)
     setConfirmOpen(false)
@@ -76,7 +75,7 @@ const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormPr
             Cancel
           </div>
         </div>
-        {confirmOpen && <ConfirmChoice handleConfirmation={handleConfirmation} setNewComment={setNewComment} />}
+        {confirmOpen && <ConfirmationModal handleConfirmation={handleConfirmation} setNewComment={setNewComment} />}
       </form>
     </div>
   )

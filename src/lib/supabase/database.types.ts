@@ -111,7 +111,7 @@ export type Database = {
       }
       comments: {
         Row: {
-          commenter: string
+          commenter: string | null
           content: string
           created_at: string
           deleted: boolean
@@ -122,7 +122,7 @@ export type Database = {
           title: string | null
         }
         Insert: {
-          commenter?: string
+          commenter?: string | null
           content: string
           created_at?: string
           deleted?: boolean
@@ -133,7 +133,7 @@ export type Database = {
           title?: string | null
         }
         Update: {
-          commenter?: string
+          commenter?: string | null
           content?: string
           created_at?: string
           deleted?: boolean
@@ -240,39 +240,85 @@ export type Database = {
         }
         Relationships: []
       }
-      tournament: {
+      signups: {
         Row: {
-          applicant_id: string | null
+          applicant_name: string | null
           created_at: string
           id: string
-          tournament_name: string
-          user_id: string | null
+          tournament_id: string
+          user_name: string
         }
         Insert: {
-          applicant_id?: string | null
+          applicant_name?: string | null
           created_at?: string
           id?: string
-          tournament_name: string
-          user_id?: string | null
+          tournament_id: string
+          user_name: string
         }
         Update: {
-          applicant_id?: string | null
+          applicant_name?: string | null
           created_at?: string
           id?: string
-          tournament_name?: string
-          user_id?: string | null
+          tournament_id?: string
+          user_name?: string
         }
         Relationships: [
           {
-            foreignKeyName: "tournament_applicant_id_fkey"
-            columns: ["applicant_id"]
+            foreignKeyName: "signups_applicant_name_fkey"
+            columns: ["applicant_name"]
             isOneToOne: false
             referencedRelation: "applicants"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tournament_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: "signups_tournament_id_fkey"
+            columns: ["tournament_id"]
+            isOneToOne: false
+            referencedRelation: "tournament"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "signups_user_name_fkey"
+            columns: ["user_name"]
+            isOneToOne: false
+            referencedRelation: "profile"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tournament: {
+        Row: {
+          applicant_name: string | null
+          created_at: string
+          id: string
+          tournament_name: string
+          user_name: string | null
+        }
+        Insert: {
+          applicant_name?: string | null
+          created_at?: string
+          id?: string
+          tournament_name: string
+          user_name?: string | null
+        }
+        Update: {
+          applicant_name?: string | null
+          created_at?: string
+          id?: string
+          tournament_name?: string
+          user_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tournament_applicant_name_fkey"
+            columns: ["applicant_name"]
+            isOneToOne: false
+            referencedRelation: "applicants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tournament_user_name_fkey"
+            columns: ["user_name"]
             isOneToOne: false
             referencedRelation: "profile"
             referencedColumns: ["id"]

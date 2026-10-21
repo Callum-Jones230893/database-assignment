@@ -9,13 +9,13 @@ export const loginSchema = z.object({
 
 export const createPostSchema = z.object({
   title: z.string().min(6),
-  content: z.string().optional(),
-  image: z.union([z.instanceof(File), z.array(z.instanceof(File))]).optional()
+  content: z.string().min(20, "Please have some content."),
+  image: z.union([z.instanceof(File), z.array(z.instanceof(File))]).optional(),
 })
 
 export const commentSchema = z.object({
-  content: z.string(),
-  image: z.union([z.instanceof(File), z.array(z.instanceof(File))]).optional()
+  content: z.string().min(20, "You need an actual comment in order to reply."),
+  image: z.union([z.instanceof(File), z.array(z.instanceof(File))]).optional(),
 })
 
 export const signUpSchema = z.object({
