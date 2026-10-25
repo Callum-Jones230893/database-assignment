@@ -2,9 +2,17 @@ import { CommentType } from "@/lib/supabase/queries"
 import DeleteCommentButton from "../DeleteCommentButton"
 import { User } from "@supabase/auth-js"
 import NewCommentWrapper from "../NewCommentWrapper"
-import { MappedCommentType } from "../CommentCard"
 
-// remove commentcard and move imported type here
+export type MappedCommentType = {
+  id: string
+  parent_id: string | null
+  content: string
+  created_at: string
+  commenter: {
+    id: string
+    username: string
+  } | null
+}
 
 type NestedCommentsProps = {
   comments: CommentType
@@ -37,10 +45,10 @@ const NestedComments = ({
             <div className="">
               <div className="border border-orange-400 p-4 mb-4 rounded-2xl w-full">
                 <p>{comment.content}</p>
-                <p>{comment.commenter.username}</p>
+                <p>{comment.commenter!.username}</p>
                 <div className="flex justify-end">
                   <div>
-                    {isAuthor || userId === comment.commenter.id ? (
+                    {isAuthor || userId === comment.commenter!.id ? (
                       <DeleteCommentButton id={comment.id} slug={slug} />
                     ) : (
                       ""
