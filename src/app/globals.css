@@ -10,14 +10,26 @@
   }
 }
 
+@theme {
+  --color-text-primary: linen;
+  --color-background: #0c0e0a;
+  --color-foreground: linen;
+  --color-accent-one: darkslategray;
+  --color-accent-two: #fa7000;
+}
+
+:root {
+
+}
+
 * {
   box-sizing: border-box;
 }
 
 .subtitle {
-  @apply text-2xl text-center mb-10;
+  @apply mb-4 text-2xl text-decoration-line: underline decoration-[#fa7000] decoration-2;
 }
 
 .button {
-  @apply border border-orange-500 rounded-2xl w-fit p-2;
+  @apply border border-accent-one rounded-2xl w-fit p-2;
 }

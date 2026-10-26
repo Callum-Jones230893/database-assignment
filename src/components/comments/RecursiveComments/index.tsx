@@ -30,12 +30,12 @@ const NestedComments = ({
   if (childComments.length === 0) return null
 
   return (
-    <div className="flex flex-col pl-4 border-l border-orange-200/20">
+    <div className="flex flex-col pl-4 border-l border-accent-one">
       <ul className="space-y-1">
         {childComments.map((comment: MappedCommentType) => (
           <li key={comment.id} className="mt-2">
             <div className="">
-              <div className="border border-orange-400 p-4 mb-4 rounded-2xl w-full">
+              <div className="border border-accent-one p-4 mb-4 rounded-2xl w-full">
                 <p>{comment.content}</p>
                 <p>{comment.commenter.username}</p>
                 <div className="flex justify-end">

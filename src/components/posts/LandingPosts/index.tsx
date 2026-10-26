@@ -24,17 +24,25 @@ const LandingPosts = ({ posts }: LandingPostProps) => {
   })
 
   return (
-    <div className="flex-col grow w-8/10">
+    <div className="flex-col w-8/10 mb-10">
+      <h2 className="mb-4 text-2xl">Latest Posts</h2>
       {data &&
         data.map((post) => (
           <Link
             href={`/${post.slug}`}
             key={post.id}
-            className="border-2 border-orange-500 p-4 block mb-4 rounded-2xl shadow-sm shadow-orange-400 min-h-[5%]"
+            className="border-2 border-accent-one p-4 flex mb-3 h-30 items-center hover:bg-[#20251b]"
           >
-            <div>
+            <div className="bg-[#fa7000] w-1 h-full mr-4"></div>
+            <div className="flex justify-between items-center w-full">
+              <div className="flex flex-col">
                 <h3 className="font-bold text-2xl">{post.title}</h3>
-                <p className="text-right">Posted by {post.author.username}</p>
+                {/* add shortened version of the content */}
+              </div>
+              <div className="h-30 flex w-40 items-end pb-4 gap-4">
+                <p>Author:</p>
+                <p>{post.author.username}</p>
+              </div>
             </div>
           </Link>
         ))}

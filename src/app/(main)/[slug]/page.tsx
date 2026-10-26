@@ -1,15 +1,13 @@
 import PostWrapper from "@/components/posts/PostWrapper"
-import { getComment, getFullPost } from "@/lib/supabase/queries"
+import { getComment, getFullPost, getTournament } from "@/lib/supabase/queries"
 import { createClient } from "@/lib/supabase/serverClient"
-import Link from "next/link"
-import DeleteButton from "./DeleteButton"
 
 const PostPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = await params
   const supabase = await createClient()
 
-  const { data, error } = await getFullPost(slug)
   const { data: { user } } = await supabase.auth.getUser()
+  const { data, error } = await getFullPost(slug)
 
   const { data: comments } = data ? await getComment(data.id) : { data: null }
 
@@ -17,7 +15,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <>
-      <div className={`flex flex-col gap-10`}>
+      <div className={`flex flex-col w-full gap-10`}>
         {/* create as popup */}
         {data && <PostWrapper comments={comments} user={user} data={data} slug={slug} isAuthor={isAuthor} /> }
       </div>

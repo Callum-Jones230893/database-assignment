@@ -4,6 +4,7 @@ import { QueryClientProvider } from "../../providers/queryProvider";
 import { Toaster } from "sonner";
 import '@/src/app/globals.css';
 import Footer from "@/components/Footer"
+import SideBar from "@/components/SideBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,10 +27,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <body className="min-h-screen flex flex-col bg-gray-900 text-orange-200">
+      <body className="min-h-screen flex flex-col bg-background text-accent-one">
         <QueryClientProvider>
           <Toaster />
-          <div className="flex flex-1 flex-col w-full">
+          <div className="flex flex-1 flex-col w-full text-text-primary">
             {children}
           </div>
           <Footer />

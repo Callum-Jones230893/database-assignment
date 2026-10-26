@@ -1,16 +1,16 @@
 "use client"
 
-import { useState } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import generateTournament from "@/lib/utils/bracketLogic"
 
 type BracketGeneratorProps = {
   tournamentId: string
+  creating: boolean
+  setCreating: Dispatch<SetStateAction<boolean>>
+  setCreated: Dispatch<SetStateAction<boolean>>
 }
 
-const BracketGenerator = ({ tournamentId }: BracketGeneratorProps) => {
-  const [creating, setCreating] = useState<boolean>(false)
-  const [created, setCreated] = useState<boolean>(false)
-
+const BracketGenerator = ({ tournamentId, creating, setCreating, setCreated }: BracketGeneratorProps) => {
   const handlePopulation = async () => {
     setCreating(true)
 

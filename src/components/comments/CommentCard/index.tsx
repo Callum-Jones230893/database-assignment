@@ -38,7 +38,7 @@ const CommentCard = ({
         <>
           {!comment.parent_id && (
             <div className="w-9/10">
-              <div className="border border-orange-400 p-4 mb-4 rounded-2xl w-full">
+              <div className="border border-accent-one p-4 mb-4 rounded-2xl w-full">
                 <p>{comment.content}</p>
                 <p>{comment.commenter.username}</p>
                 <div className="flex justify-end">
