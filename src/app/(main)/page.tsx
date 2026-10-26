@@ -7,7 +7,7 @@ export default async function Home() {
   const { data, error } = await getLandingPosts(supabase);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col w-full items-center">
       <LandingPosts posts={data} />
     </div>
   )

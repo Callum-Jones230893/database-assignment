@@ -1,0 +1,10 @@
+To generate the brackets WITHOUT a library if I do not want to change my table format?
+
+fetch from my two tables, users and applicants (signups that are both authenticated and unauthenticated)
+
+Will return two arrays of objects, one for each table.
+
+I then combine the two arrays, any column missing can be declared null
+I can randomize the objects in the array, and then push to "signups" table
+
+Signups table only takes a name etc and currently wont have any reference or history to simplify it

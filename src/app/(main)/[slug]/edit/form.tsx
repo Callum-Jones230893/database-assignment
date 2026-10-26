@@ -42,7 +42,7 @@ const EditPageForm = ({ initialValues, postId }: {initialValues: Pick<Tables<"po
           postId
         })
       })} 
-        className="flex flex-col w-md m-auto p-10 border border-sushi rounded-2xl mb-4">
+        className="flex flex-col w-md m-auto p-10 border border-accent-one rounded-2xl mb-4">
         <label htmlFor="title">Title</label>
         <input {...register("title")} placeholder="title..." className="input" />
         {errors.title && <ErrorMessage error={errors.title.message!}/>}

@@ -80,24 +80,17 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "brackets_player_one_fkey"
+            foreignKeyName: "brackets_player_one_fkey2"
             columns: ["player_one"]
             isOneToOne: false
-            referencedRelation: "profile"
+            referencedRelation: "signups"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "brackets_player_one_fkey1"
-            columns: ["player_one"]
-            isOneToOne: false
-            referencedRelation: "applicants"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "brackets_player_two_fkey"
+            foreignKeyName: "brackets_player_two_fkey1"
             columns: ["player_two"]
             isOneToOne: false
-            referencedRelation: "profile"
+            referencedRelation: "signups"
             referencedColumns: ["id"]
           },
           {
@@ -246,21 +239,21 @@ export type Database = {
           created_at: string
           id: string
           tournament_id: string
-          user_name: string
+          user_name: string | null
         }
         Insert: {
           applicant_name?: string | null
           created_at?: string
           id?: string
           tournament_id: string
-          user_name: string
+          user_name?: string | null
         }
         Update: {
           applicant_name?: string | null
           created_at?: string
           id?: string
           tournament_id?: string
-          user_name?: string
+          user_name?: string | null
         }
         Relationships: [
           {
@@ -288,37 +281,30 @@ export type Database = {
       }
       tournament: {
         Row: {
-          applicant_name: string | null
           created_at: string
+          created_by: string
           id: string
+          slug: string | null
           tournament_name: string
-          user_name: string | null
         }
         Insert: {
-          applicant_name?: string | null
           created_at?: string
+          created_by: string
           id?: string
+          slug?: string | null
           tournament_name: string
-          user_name?: string | null
         }
         Update: {
-          applicant_name?: string | null
           created_at?: string
+          created_by?: string
           id?: string
+          slug?: string | null
           tournament_name?: string
-          user_name?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "tournament_applicant_name_fkey"
-            columns: ["applicant_name"]
-            isOneToOne: false
-            referencedRelation: "applicants"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "tournament_user_name_fkey"
-            columns: ["user_name"]
+            foreignKeyName: "tournament_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "profile"
             referencedColumns: ["id"]
