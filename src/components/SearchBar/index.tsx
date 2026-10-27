@@ -20,6 +20,11 @@ const SearchBar = () => {
     setSearchResults(data)
   }
 
+  const handleClear = () => {
+    setSearchResults(null)
+    setSearch("")
+  }
+
   return (
     <div className="relative">
       <div className="flex w-[10%] items-center gap-5">
@@ -38,7 +43,7 @@ const SearchBar = () => {
       {searchResults && (
         <div className="absolute left-0 top-full">
           {searchResults.map((result, index) => (
-            <Link className="block" key={index} href={`/${result.slug}`}>
+            <Link onClick={handleClear} className="block" key={index} href={`/${result.slug}`}>
               {result.title}
             </Link>
           ))}

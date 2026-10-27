@@ -43,12 +43,10 @@ export const EditPost = async({ postData, postId }: {postData:z.infer<typeof cre
     updatedImages = data.image || []
   }
 
-
   const {data: updatedPosts} = await supabase
     .from("post")
     .update({
       ...parsedData,
-      slug: slugify(parsedData.title),
       image: updatedImages
     })
     .eq("id", postId)

@@ -42,7 +42,7 @@ const NewPost = () => {
           image: values.image && values.image.length > 0 ? values.image : undefined
         })
       })} 
-        className="flex flex-col w-md m-auto p-10 border border-sushi rounded-2xl mb-4">
+        className="post-form">
         <label htmlFor="title">Title</label>
         <input {...register("title")} placeholder="title..." className="input" />
         {errors.title && <ErrorMessage error={errors.title.message!}/>}

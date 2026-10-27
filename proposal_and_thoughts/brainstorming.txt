@@ -1,3 +1,7 @@
+Create tournament, I guess add a selection like "create post" but "create tournament" that references tournament table
+  And then on the sidebar it will display just tournaments from newest to oldest
+
+
 To generate the brackets WITHOUT a library if I do not want to change my table format?
 
 fetch from my two tables, users and applicants (signups that are both authenticated and unauthenticated)

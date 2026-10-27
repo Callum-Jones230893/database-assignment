@@ -58,12 +58,12 @@ const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormPr
       <form
         onSubmit={handleSubmit(handlePreConfirmation)}
         onClick={(e) => e.stopPropagation()}
-        className="flex flex-col items-center gap-10 w-full max-w-md p-10 border-2 border-accent-one rounded-2xl bg-gray-800/90 z-55"
+        className="flex flex-col items-center gap-10 w-full max-w-md p-10 border-2 border-accent-one bg-[#1d201b] z-55"
       >
         <textarea
           {...register("content")}
           placeholder="Content..."
-          className="border border-blue-500 rounded-md p-2 w-9/10"
+          className="border border-accent-one rounded-md p-2 w-9/10"
         ></textarea>
         {errors.content && <p>{errors.content.message}</p>}
 

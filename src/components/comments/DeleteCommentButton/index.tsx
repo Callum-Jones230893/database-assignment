@@ -16,7 +16,7 @@ const DeleteCommentButton = ({ id, slug }: DeleteComentButtonProps) => {
   })
 
   return (
-    <button onClick={() => mutate(id)} className="button cursor-pointer">
+    <button onClick={() => mutate(id)} className="button">
       Delete comment
     </button>
   )

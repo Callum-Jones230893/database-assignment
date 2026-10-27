@@ -4,7 +4,6 @@ import { QueryClientProvider } from "../../providers/queryProvider";
 import { Toaster } from "sonner";
 import '@/src/app/globals.css';
 import Footer from "@/components/Footer"
-import SideBar from "@/components/SideBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

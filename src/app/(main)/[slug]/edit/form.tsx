@@ -10,7 +10,17 @@ import { createPostSchema } from "../../../../../actions/schemas"
 import { EditPost } from "../../../../../actions/edit-post-action"
 
 const EditPageForm = ({ initialValues, postId }: {initialValues: Pick<Tables<"post">, "title" | "content" | "image">, postId: string}) => {
-  const postImageSchema = createPostSchema.omit({image: true}).extend({image: z.unknown().transform(value => {return value as FileList}).optional()})
+  const postImageSchema = createPostSchema.omit({ image: true }).extend({
+    image: z
+      .unknown()
+      .transform((value) => {
+        if (value instanceof FileList) {
+          return Array.from(value)
+        }
+        return [];
+      })
+      .optional()
+  })
 
   const { register, handleSubmit, formState: {errors} } = useForm({
     resolver: zodResolver(postImageSchema),
@@ -28,21 +38,18 @@ const EditPageForm = ({ initialValues, postId }: {initialValues: Pick<Tables<"po
   return (
     <div className="flex flex-col">
       <form onSubmit={handleSubmit((values) => {
-        let newImage = undefined
+        let newImage =  values.image ?? []
         
-        if (values.image && typeof values.image !== "string") {
-          newImage = new FormData()
-          newImage.append("image", values.image[0])
-        }
-        mutate({postData: {
-          title: values.title,
-          content: values.content,
-          image: newImage
-        },
-          postId
+        mutate({
+          postData: {
+            title: values.title,
+            content: values.content,
+            image: newImage.length > 0 ? newImage : undefined,
+          },
+          postId,
         })
       })} 
-        className="flex flex-col w-md m-auto p-10 border border-accent-one rounded-2xl mb-4">
+        className="post-form">
         <label htmlFor="title">Title</label>
         <input {...register("title")} placeholder="title..." className="input" />
         {errors.title && <ErrorMessage error={errors.title.message!}/>}
@@ -51,10 +58,17 @@ const EditPageForm = ({ initialValues, postId }: {initialValues: Pick<Tables<"po
         <textarea {...register("content")} className="input" />
         {errors.content && <ErrorMessage error={errors.content.message!} />}
 
-        <img src={initialValues.image!} alt="" />
+        <div className="grid grid-cols-3 grid-auto-flow-row w-1/2 mx-auto my-5 gap-y-10">
+          {initialValues.image && initialValues.image!.map(img =>  
+            <div key={img} className='w-25 h-auto'>
+              <img src={img} alt={img} />
+            </div>
+          )}
+        </div>
+        
 
         <label htmlFor="image">Update an image</label>
-        <input type="file" {...register("image")} className="input" />
+        <input type="file" multiple {...register("image")} className="input" />
         {errors.image && <ErrorMessage error={errors.image.message!} />}
 
         <button className="button cursor-pointer">Submit</button>

@@ -31,9 +31,9 @@ const LandingPosts = ({ posts }: LandingPostProps) => {
           <Link
             href={`/${post.slug}`}
             key={post.id}
-            className="border-2 border-accent-one p-4 flex mb-3 h-30 items-center hover:bg-[#20251b]"
+            className="border-2 border-accent-one p-4 flex mb-3 h-30 items-center hover:bg-[#1d201b]"
           >
-            <div className="bg-[#fa7000] w-1 h-full mr-4"></div>
+            <div className="bg-accent-two w-1 h-full mr-4"></div>
             <div className="flex justify-between items-center w-full">
               <div className="flex flex-col">
                 <h3 className="font-bold text-2xl">{post.title}</h3>

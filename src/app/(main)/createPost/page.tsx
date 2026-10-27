@@ -2,7 +2,7 @@ import NewPost from "@/components/posts/NewPost"
 
 const CreatePostPage = () => {
   return (
-    <div>
+    <div className="flex flex-col w-full">
       <h2 className="subtitle">Create Post</h2>
       <NewPost />
     </div>

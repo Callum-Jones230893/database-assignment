@@ -20,8 +20,8 @@ const EditPostPage = async ({ params }: { params: { slug: string } }) => {
   return (
     <>
       {data && 
-        <div className="flex flex-col mx-auto">
-          <h2 className="heading">
+        <div className="flex flex-col">
+          <h2 className="subtitle text-center">
             Editing {data.title}
           </h2>
           <EditPageForm initialValues={{title: data.title, content: data.content, image: data.image}} postId={data.id} />

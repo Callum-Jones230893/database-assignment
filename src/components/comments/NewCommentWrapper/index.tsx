@@ -17,7 +17,7 @@ const NewCommentWrapper = ({ postId, slug, parentId }: NewCommentProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center cursor-pointer">
       {!newComment && (
         <div className="button" onClick={handleClick}>
           Comment
