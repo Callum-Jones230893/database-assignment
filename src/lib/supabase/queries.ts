@@ -44,26 +44,57 @@ export const getComment = async (postId: string) => {
 
 export type TournamentType = QueryData<ReturnType<typeof getTournament>>
 
-export const getTournament = async (title: string) => {
+export const getTournament = async (slug: string) => {
   const supabase = await createClient()
   return supabase
     .from("tournament")
     .select(`id, tournament_name, created_by("id", "username")`)
-    .eq(`tournament_name`, title)
+    .eq(`slug`, slug)
     .single()
 }
 
-export type getBracketsType = QueryData<ReturnType<typeof getBrackets>>
+// export type getBracketsType = QueryData<ReturnType<typeof getBrackets>>
 
-export const getBrackets = async (tournamentId: string ) => {
+// export const getBrackets = async (tournamentId: string ) => {
+//   const supabase = await createClient()
+//   return supabase
+//     .from("brackets")
+//     .select(
+//       `id, bracket_number, game_number,
+//        time_slot, player_one("id", "user_name", "applicant_name"),
+//        player_two("id", "user_name", "applicant_name"),
+//        winner, loser, tournament_id("id")`
+//       )
+//     .eq("tournament_id", tournamentId)
+// }
+
+export type getApplicantType = QueryData<ReturnType<typeof getApplicants>>
+
+export const getApplicants = async ( applicantId: string ) => {
   const supabase = await createClient()
   return supabase
-    .from("brackets")
-    .select(
-      `id, bracket_number, game_number,
-       time_slot, player_one("id", "user_name", "applicant_name"),
-       player_two("id", "user_name", "applicant_name"),
-       winner, loser, tournament_id("id")`
-      )
-    .eq("tournament_id", tournamentId)
+    .from("applicants")
+    .select("id, name, experience, classroom")
+    .eq("id", applicantId)
+}
+
+export type getSignupType = QueryData<ReturnType<typeof getSignups>>
+
+export const getSignups = async ( signupName: string ) => {
+  const supabase = await createClient()
+  return supabase
+    .from("signups")
+    .select(`id, name, tournament_id("id", "tournament_name"), user_name("id", "username", "experience", "classroom"), applicant_name("id", "name", "experience", "classroom"), classroom`)
+    .eq("name", signupName)
+}
+
+export type getProfileType = QueryData<ReturnType<typeof getProfile>>
+
+export const getProfile = async ( username: string ) => {
+  const supabase = await createClient()
+  return supabase
+    .from("profile")
+    .select("*")
+    .eq("username", username )
+    .single()
 }

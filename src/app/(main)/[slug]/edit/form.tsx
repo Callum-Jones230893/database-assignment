@@ -1,13 +1,13 @@
 "use client"
 
 import ErrorMessage from "@/components/ErrorMessage"
-import { type Tables } from "@/lib/supabase/database.types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import z from "zod"
 import { createPostSchema } from "../../../../../actions/schemas"
 import { EditPost } from "../../../../../actions/edit-post-action"
+import { Tables } from "@/lib/supabase/database.types"
 
 const EditPageForm = ({ initialValues, postId }: {initialValues: Pick<Tables<"post">, "title" | "content" | "image">, postId: string}) => {
   const postImageSchema = createPostSchema.omit({ image: true }).extend({

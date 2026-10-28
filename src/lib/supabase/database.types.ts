@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       applicants: {
         Row: {
+          classroom: string
           created_at: string
           deleted: boolean
           deleted_at: string
@@ -24,6 +25,7 @@ export type Database = {
           name: string | null
         }
         Insert: {
+          classroom: string
           created_at?: string
           deleted?: boolean
           deleted_at: string
@@ -32,6 +34,7 @@ export type Database = {
           name?: string | null
         }
         Update: {
+          classroom?: string
           created_at?: string
           deleted?: boolean
           deleted_at?: string
@@ -48,8 +51,8 @@ export type Database = {
           game_number: number
           id: string
           loser: string | null
-          player_one: string | null
-          player_two: string | null
+          opponent1_id: string | null
+          opponent2_id: string | null
           time_slot: string
           tournament_id: string
           winner: string | null
@@ -60,8 +63,8 @@ export type Database = {
           game_number: number
           id?: string
           loser?: string | null
-          player_one?: string | null
-          player_two?: string | null
+          opponent1_id?: string | null
+          opponent2_id?: string | null
           time_slot?: string
           tournament_id: string
           winner?: string | null
@@ -72,23 +75,23 @@ export type Database = {
           game_number?: number
           id?: string
           loser?: string | null
-          player_one?: string | null
-          player_two?: string | null
+          opponent1_id?: string | null
+          opponent2_id?: string | null
           time_slot?: string
           tournament_id?: string
           winner?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "brackets_player_one_fkey2"
-            columns: ["player_one"]
+            foreignKeyName: "brackets_opponent1_id_fkey"
+            columns: ["opponent1_id"]
             isOneToOne: false
             referencedRelation: "signups"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "brackets_player_two_fkey1"
-            columns: ["player_two"]
+            foreignKeyName: "brackets_opponent2_id_fkey"
+            columns: ["opponent2_id"]
             isOneToOne: false
             referencedRelation: "signups"
             referencedColumns: ["id"]
@@ -163,6 +166,7 @@ export type Database = {
           deleted_at: string | null
           id: string
           image: string[] | null
+          is_tournament: boolean | null
           slug: string
           title: string
         }
@@ -175,6 +179,7 @@ export type Database = {
           deleted_at?: string | null
           id?: string
           image?: string[] | null
+          is_tournament?: boolean | null
           slug: string
           title: string
         }
@@ -187,6 +192,7 @@ export type Database = {
           deleted_at?: string | null
           id?: string
           image?: string[] | null
+          is_tournament?: boolean | null
           slug?: string
           title?: string
         }
@@ -202,6 +208,7 @@ export type Database = {
       }
       profile: {
         Row: {
+          classroom: string | null
           created_at: string
           deleted: boolean
           deleted_at: string | null
@@ -212,6 +219,7 @@ export type Database = {
           username: string
         }
         Insert: {
+          classroom?: string | null
           created_at?: string
           deleted?: boolean
           deleted_at?: string | null
@@ -222,6 +230,7 @@ export type Database = {
           username: string
         }
         Update: {
+          classroom?: string | null
           created_at?: string
           deleted?: boolean
           deleted_at?: string | null
@@ -236,6 +245,8 @@ export type Database = {
       signups: {
         Row: {
           applicant_name: string | null
+          classroom: string | null
+          name: string
           created_at: string
           id: string
           tournament_id: string
@@ -243,6 +254,8 @@ export type Database = {
         }
         Insert: {
           applicant_name?: string | null
+          classroom?: string | null
+          name: string
           created_at?: string
           id?: string
           tournament_id: string
@@ -250,6 +263,8 @@ export type Database = {
         }
         Update: {
           applicant_name?: string | null
+          classroom?: string | null
+          name: string
           created_at?: string
           id?: string
           tournament_id?: string

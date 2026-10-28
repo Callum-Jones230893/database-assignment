@@ -4,7 +4,6 @@ import z from "zod"
 import { createPostSchema } from "./schemas"
 import { createClient } from "@/lib/supabase/serverClient"
 import { redirect } from "next/navigation"
-import { slugify } from "@/lib/supabase/slugify";
 import { uploadImage } from "@/lib/supabase/upload-image"
 
 export const EditPost = async({ postData, postId }: {postData:z.infer<typeof createPostSchema>, postId: string}) => {
