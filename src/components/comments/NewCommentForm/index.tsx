@@ -3,9 +3,9 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
-import { commentSchema } from "../../../../actions/schemas"
+import { commentSchema } from "@/actions/schemas"
 import z from "zod"
-import { CreateComment } from "../../../../actions/comment-action"
+import { CreateComment } from "@/actions/comment-action"
 import { Dispatch, SetStateAction, useState } from "react"
 import ConfirmationModal from "@/components/ConfirmationModal"
 

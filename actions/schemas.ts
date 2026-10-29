@@ -15,7 +15,6 @@ export const createPostSchema = z.object({
 
 export const commentSchema = z.object({
   content: z.string().min(20, "You need an actual comment in order to reply."),
-  image: z.union([z.instanceof(File), z.array(z.instanceof(File))]).optional(),
 })
 
 export const signUpSchema = z.object({

@@ -1,23 +1,37 @@
 "use client"
 
+import { TournamentType, SignupType } from "@/lib/supabase/queries"
+import BracketDisplayWrapper from "../brackets/BracketDisplayWrapper"
+import SignupWrapper from "../signups/SignupWrapper"
 import { useState } from "react"
-import BracketGenerator from "../BracketGenerator"
-import TournamentDisplay from "../TournamentDisplay"
-import { getBracketsType } from "@/lib/supabase/queries"
 
 type TournamentWrapperProps = {
-  tournamentId: string
-  data: getBracketsType
+  tournament: TournamentType
+  signups: SignupType | null
+  isCreator: boolean
 }
 
-const TournamentWrapper = ({ tournamentId, data }: TournamentWrapperProps) => {
-  const [creating, setCreating] = useState<boolean>(false)
-  const [created, setCreated] = useState<boolean>(false)
+const TournamentWrapper = ({ tournament, signups, isCreator }: TournamentWrapperProps) => {
+  const [isGenerated, setIsGenerated] = useState<boolean>(false)
+  const [generating, setGenerating] = useState<boolean>(false)
 
   return (
     <div>
-      {!created && <BracketGenerator tournamentId={tournamentId} creating={creating} setCreating={setCreating} setCreated={setCreated} />}
-      {created && <TournamentDisplay data={data} />}
+      <div>
+        <h2 className="subtitle">{tournament.tournament_name}</h2>
+        <h3>{tournament.created_by.username}</h3>
+      </div>
+      {!isGenerated && <SignupWrapper tournament={tournament} signups={signups} />}
+      {isGenerated && 
+        <BracketDisplayWrapper
+          tournament={tournament}
+          signups={signups}
+          isCreator={isCreator}
+          isGenerated={isGenerated}
+          setIsGenerated={setIsGenerated}
+          generating={generating}
+          setGenerating={setGenerating}
+        />}
     </div>
   )
 }

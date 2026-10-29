@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/serverClient";
 
 export default async function Home() {
   const supabase = await createClient();
-  const { data, error } = await getLandingPosts(supabase);
+  const { data, error } = await getLandingPosts(supabase)
 
   return (
     <div className="flex flex-col w-full items-center ">

@@ -1,18 +1,16 @@
-import { getSignupType } from "@/lib/supabase/queries"
+import { SignupType } from "@/lib/supabase/queries"
 
 type SignupListProps = {
-  signups: getSignupType | null
+  signups: SignupType | null
 }
 
 const SignupList = ({ signups }: SignupListProps) => {
   return (
     <div>
       {signups!.map((signup) => 
-        <li>
-          <ul>
-            {signup.name}
-          </ul>
-        </li>
+        <div>
+          <p>{signup.name}</p>
+        </div>
       )}
     </div>
   )

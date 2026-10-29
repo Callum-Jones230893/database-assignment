@@ -1,4 +1,3 @@
-import { Match } from "brackets-model"
 import { createClient } from "./browserClient"
 import { type QueryData } from "@supabase/supabase-js"
 
@@ -53,44 +52,29 @@ export const getTournament = async (slug: string) => {
     .single()
 }
 
-// export type getBracketsType = QueryData<ReturnType<typeof getBrackets>>
+export type BracketType = QueryData<ReturnType<typeof getBrackets>>
 
-// export const getBrackets = async (tournamentId: string ) => {
-//   const supabase = await createClient()
-//   return supabase
-//     .from("brackets")
-//     .select(
-//       `id, bracket_number, game_number,
-//        time_slot, player_one("id", "user_name", "applicant_name"),
-//        player_two("id", "user_name", "applicant_name"),
-//        winner, loser, tournament_id("id")`
-//       )
-//     .eq("tournament_id", tournamentId)
-// }
-
-export type getApplicantType = QueryData<ReturnType<typeof getApplicants>>
-
-export const getApplicants = async ( applicantId: string ) => {
+export const getBrackets = async (tournamentId: string) => {
   const supabase = await createClient()
   return supabase
-    .from("applicants")
-    .select("id, name, experience, classroom")
-    .eq("id", applicantId)
+    .from("brackets")
+    .select("*")
+    .eq("tournament_id", tournamentId)
 }
 
-export type getSignupType = QueryData<ReturnType<typeof getSignups>>
+export type SignupType = QueryData<ReturnType<typeof getSignups>>
 
-export const getSignups = async ( signupName: string ) => {
+export const getSignups = async (signupName: string) => {
   const supabase = await createClient()
   return supabase
     .from("signups")
-    .select(`id, name, tournament_id("id", "tournament_name"), user_name("id", "username", "experience", "classroom"), applicant_name("id", "name", "experience", "classroom"), classroom`)
+    .select(`id, name, tournament_id("id", "tournament_name"), user_name("id", "username", "experience", "classroom"), applicant_name, classroom`)
     .eq("name", signupName)
 }
 
-export type getProfileType = QueryData<ReturnType<typeof getProfile>>
+export type ProfileType = QueryData<ReturnType<typeof getProfile>>
 
-export const getProfile = async ( username: string ) => {
+export const getProfile = async (username: string) => {
   const supabase = await createClient()
   return supabase
     .from("profile")

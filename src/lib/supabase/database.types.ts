@@ -246,38 +246,34 @@ export type Database = {
         Row: {
           applicant_name: string | null
           classroom: string | null
-          name: string
           created_at: string
           id: string
+          name: string
           tournament_id: string
           user_name: string | null
+          slug: string
         }
         Insert: {
           applicant_name?: string | null
           classroom?: string | null
-          name: string
           created_at?: string
           id?: string
+          name: string
           tournament_id: string
           user_name?: string | null
+          slug: string
         }
         Update: {
           applicant_name?: string | null
           classroom?: string | null
-          name: string
           created_at?: string
           id?: string
+          name?: string
           tournament_id?: string
           user_name?: string | null
+          slug: string
         }
         Relationships: [
-          {
-            foreignKeyName: "signups_applicant_name_fkey"
-            columns: ["applicant_name"]
-            isOneToOne: false
-            referencedRelation: "applicants"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "signups_tournament_id_fkey"
             columns: ["tournament_id"]
