@@ -35,7 +35,6 @@ const nextBracket = async ({ bracketId, winnerId, slug }: NextBracketProps) => {
 
   const nextRound = teams.round_number + 1
   const nextGame = Math.ceil(teams.game_number / 2)
-
   const { data: nextMatch, error: nextError } = await supabase
     .from("brackets")
     .select("id")
@@ -48,6 +47,7 @@ const nextBracket = async ({ bracketId, winnerId, slug }: NextBracketProps) => {
 
 
   if (nextMatch) {
+
   const updateWinner = teams.game_number % 2 === 1 ? { team_name: winnerId } : { opponent_id: winnerId }
 
     const { error: nextRoundError } = await supabase
