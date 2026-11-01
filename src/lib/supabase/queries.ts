@@ -9,6 +9,14 @@ export const getLandingPosts = async (supabase: ReturnType<typeof createClient>)
     .select(`id, title, slug, author("id", "username")`)
 }
 
+export type HostedTournamentsType = QueryData<ReturnType<typeof getHostedTournaments>>
+
+export const getHostedTournaments = async (supabase: ReturnType<typeof createClient>) => {
+  return await supabase
+    .from("tournament")
+    .select(`id, tournament_name, slug, created_by("id", "username")`)
+}
+
 export type FullPostType = QueryData<ReturnType<typeof getFullPost>>
 
 export const getFullPost = async (slug: string) => {
@@ -47,7 +55,7 @@ export const getTournament = async (slug: string) => {
   const supabase = await createClient()
   return supabase
     .from("tournament")
-    .select(`id, tournament_name, created_by("id", "username")`)
+    .select(`id, tournament_name, slug, created_by("id", "username")`)
     .eq(`slug`, slug)
     .single()
 }
@@ -64,12 +72,12 @@ export const getBrackets = async (tournamentId: string) => {
 
 export type SignupType = QueryData<ReturnType<typeof getSignups>>
 
-export const getSignups = async (signupName: string) => {
+export const getSignups = async (tournamentId: string) => {
   const supabase = await createClient()
   return supabase
     .from("signups")
-    .select(`id, name, tournament_id("id", "tournament_name"), user_name("id", "username", "experience", "classroom"), applicant_name, classroom`)
-    .eq("name", signupName)
+    .select(`id, name, tournament_id("id", "tournament_name"), user_id("id", "username", "experience", "classroom"), team_name, classroom`)
+    .eq("tournament_id", tournamentId)
 }
 
 export type ProfileType = QueryData<ReturnType<typeof getProfile>>

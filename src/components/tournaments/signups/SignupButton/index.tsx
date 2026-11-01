@@ -9,7 +9,7 @@ type SignupButtonProps = {
 
 const SignupButton = ({ formOpen, setFormOpen }: SignupButtonProps) => {
   const handleClick = () => {
-    setFormOpen(!true)
+    setFormOpen(!formOpen)
   }
 
   return (

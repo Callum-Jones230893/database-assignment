@@ -11,20 +11,16 @@ type SignupWrapperProps = {
   signups: SignupType | null
 }
 
-const SignupWrapper = async ({ tournament, signups }: SignupWrapperProps) => {
+const SignupWrapper = ({ tournament, signups }: SignupWrapperProps) => {
     const [formOpen, setFormOpen] = useState<boolean>(false)
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="min-w-1/4">
     {tournament && 
-      <div className="flex flex-col grow w-4/5">
-        <div>
-          <h2 className="subtitle">{tournament.tournament_name}</h2>
-          <h3>{tournament.created_by.username}</h3>
-        </div>
+      <div className="flex flex-col grow gap-5 items-center my-5">
         <SignupButton formOpen={formOpen} setFormOpen={setFormOpen} />
+        {formOpen && <SignupForm tournamentId={tournament.id} tournamentName={tournament.tournament_name} setFormOpen={setFormOpen} />}
         <SignupList signups={signups} />
-        <SignupForm tournamentId={tournament.id} tournamentName={tournament.tournament_name} />
       </div>}
     </div>
   )

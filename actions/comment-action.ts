@@ -12,7 +12,7 @@ export type CreateCommentProps = {
   parentId: string | null
 }
 
-export const CreateComment = async({commentContent, postId, slug, parentId}: CreateCommentProps) => {
+export const CreateComment = async({ commentContent, postId, slug, parentId }: CreateCommentProps) => {
   const supabase = await createClient()
   const validateData = commentSchema.safeParse(commentContent)
 

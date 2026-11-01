@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { QueryClientProvider } from "../../providers/queryProvider";
 import { Toaster } from "sonner";
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import '@/src/app/globals.css';
-import Footer from "@/components/Footer"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,7 +32,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <div className="flex flex-1 flex-col w-full text-text-primary">
             {children}
           </div>
-          <Footer />
         </QueryClientProvider>
       </body>
     </html>

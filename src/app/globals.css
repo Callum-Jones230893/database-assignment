@@ -27,11 +27,15 @@
 }
 
 .subtitle {
-  @apply mb-4 text-2xl underline decoration-accent-two decoration-2 text-center tracking-wide uppercase;
+  @apply  mb-6 md:text-2xl underline decoration-accent-two decoration-2 text-center tracking-widest uppercase;
+}
+
+.field-header {
+  @apply md:text-xl w-1/2 mx-auto tracking-wide uppercase;
 }
 
 .post-title {
-  @apply mb-2 text-4xl font-bold text-center tracking-wider uppercase;
+  @apply mb-2 text-[20px] md:text-2xl lg:text-4xl font-bold text-center tracking-wider uppercase;
 }
 
 .button {
@@ -39,13 +43,29 @@
 }
 
 .full-post-card {
-  @apply border-2 border-accent-one p-4 mb-4 min-h-[5%] ; 
+  @apply border-2 border-accent-one p-4 mb-4 min-h-[5%]; 
+}
+
+.full-tournament-card {
+  @apply flex flex-col justify-evenly p-4 mb-4 min-h-50 text-center; 
 }
 
 .comment-card {
-  @apply border border-accent-one p-4 mb-4 w-full hover:bg-[#1d201b];
+  @apply border border-accent-one p-4 mb-4 w-full hover:bg-[#1d201b] wrap-break-word;
 }
 
 .post-form {
-  @apply border-2 border-accent-one flex flex-col w-1/2 m-auto p-10 mb-8 ;
+  @apply border-2 border-accent-one flex flex-col w-[90%] md:w-1/2 m-auto p-10 mb-8 gap-5;
+}
+
+.application-form {
+  @apply border-2 border-accent-one flex flex-col p-10 mb-8 h-fit gap-5;
+}
+
+.navigation {
+  @apply flex items-center h-10 cursor-pointer
+}
+
+.fa-icon {
+  @apply cursor-pointer text-accent-one hover:text-accent-two transition-all duration-300 ease-in-out hover:scale-125
 }

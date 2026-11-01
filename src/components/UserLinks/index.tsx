@@ -1,22 +1,30 @@
 import { createClient } from "@/lib/supabase/serverClient"
+import Image from 'next/image'
 import Link from "next/link"
 import { Logout } from "../../../actions/logout-action"
+import create_post from "@/public/images/icons/create_post.png"
+import tournaments from "@/public/images/icons/tournaments_page.png"
 
 const UserLinks = async () => {
   const supabase = await createClient()
-  const {data:{user}, error} = await supabase.auth.getUser()
+  const {data:{ user }} = await supabase.auth.getUser()
 
   return (
-    <div className="flex justify-evenly min-w-[1/2] gap-10">
+    <div className="flex items-center justify-evenly min-w-[1/2] gap-10 mr-5">
       {user
-        ? <>
-            <div onClick={Logout} className="flex items-center button-secondary h-10">Logout</div>
-            <Link href="/createPost" className="flex items-center button-secondary h-10">Create post</Link>
-          </>
+        ? 
+          <div className="flex items-center gap-5">
+            <div onClick={Logout}><i className="fa-solid fa-arrow-right-from-bracket fa-icon"></i></div>
+            {/* <Link href="/createPost"><i className="fa-solid fa-blog fa-icon"></i></Link> */}
+            <Link href="/createPost"><Image src={create_post} alt="Create a post" className="max-w-[45px] h-[35px]"  /></Link>
+            {/* <Link href="/tournaments"><i className="fa-solid fa-trophy fa-icon"></i></Link> */}
+            <Link href="/createPost"><Image src={tournaments} alt="Tournaments" className="max-w-[45px] h-[38px]" /></Link>
+            <Link href="/createTournament" className="flex items-center h-10 cursor-pointer">Host Tournament</Link>
+          </div>
         : 
           <>
-            <Link href="/auth/login" className="flex items-center button-secondary h-10">Login</Link>
-            <Link href="/auth/signup" className="flex items-center button-secondary h-10">Signup</Link>
+            <Link href="/auth/login"><i className="fa-solid fa-right-to-bracket fa-icon"></i></Link>
+            <Link href="/auth/signup"><i className="fa-solid fa-user-plus fa-icon"></i></Link>
           </>
       }
     </div>

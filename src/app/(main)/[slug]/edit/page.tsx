@@ -20,7 +20,7 @@ const EditPostPage = async ({ params }: { params: { slug: string } }) => {
   return (
     <>
       {data && 
-        <div className="flex flex-col">
+        <div className={`flex flex-col w-full gap-10`}>
           <h2 className="subtitle text-center">
             Editing {data.title}
           </h2>

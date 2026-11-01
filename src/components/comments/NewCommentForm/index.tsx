@@ -54,7 +54,7 @@ const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormPr
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={handleClick}>
+    <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm" onClick={handleClick}>
       <form
         onSubmit={handleSubmit(handlePreConfirmation)}
         onClick={(e) => e.stopPropagation()}
@@ -63,11 +63,11 @@ const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormPr
         <textarea
           {...register("content")}
           placeholder="Content..."
-          className="border border-accent-one rounded-md p-2 w-9/10"
+          className="border border-accent-one rounded-md p-2 w-[90%]"
         ></textarea>
         {errors.content && <p>{errors.content.message}</p>}
 
-        <div className="flex justify-between w-9/10">
+        <div className="flex justify-between w-[90%]">
           <button className="button cursor-pointer">Comment</button>
           {error && <p>{error.message}</p>}
 
@@ -75,7 +75,7 @@ const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormPr
             Cancel
           </div>
         </div>
-        {confirmOpen && <ConfirmationModal handleConfirmation={handleConfirmation} setNewComment={setNewComment} />}
+        {confirmOpen && <ConfirmationModal handleConfirmation={handleConfirmation} setNewChange={setNewComment} />}
       </form>
     </div>
   )

@@ -1,7 +1,8 @@
 import { CommentType } from "@/lib/supabase/queries"
-import DeleteCommentButton from "../DeleteCommentButton"
 import { User } from "@supabase/auth-js"
 import NewCommentWrapper from "../NewCommentWrapper"
+import DeleteButton from "@/components/DeleteButton"
+import { DeleteComment } from "@/actions/delete-comment-action"
 
 export type MappedCommentType = {
   id: string
@@ -36,21 +37,25 @@ const NestedComments = ({ comments, parentId = null, slug, user, isAuthor, userI
           <li key={comment.id} className="mt-2">
             <div className="comment-card group">
               <p>{comment.content}</p>
-              <div className="flex justify-end gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="flex items-center justify-end gap-4 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 mt-4">
+                {user && comment && (
+                  <NewCommentWrapper
+                    postId={postId}
+                    slug={slug}
+                    parentId={comment.id}
+                    />
+                  )}
                 <div>
                   {isAuthor || userId === comment.commenter!.id ? (
-                    <DeleteCommentButton id={comment.id} slug={slug} />
+                    <DeleteButton
+                      id={comment.id}
+                      mutateFn={DeleteComment}
+                      successMessage="Comment deleted"
+                    />
                   ) : (
                     ""
                   )}
                 </div>
-                {user && comment && (
-                  <NewCommentWrapper
-                  postId={postId}
-                  slug={slug}
-                    parentId={comment.id}
-                    />
-                  )}
               </div>
               <p>{comment.commenter!.username}</p>
             </div>

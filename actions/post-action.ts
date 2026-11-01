@@ -48,7 +48,7 @@ export const CreatePost = async(postContent:z.infer<typeof createPostSchema>) =>
 
   const imgUrls = imgFiles.length > 0 ? await uploadImage(imgFiles) : null
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("post")
     .insert({
       author: user.id,

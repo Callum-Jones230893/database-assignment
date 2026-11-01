@@ -46,52 +46,49 @@ export type Database = {
       }
       brackets: {
         Row: {
-          bracket_number: number
           created_at: string
           game_number: number
           id: string
-          loser: string | null
-          opponent1_id: string | null
-          opponent2_id: string | null
+          opponent_id: string | null
+          round_number: number
+          team_name: string | null
           time_slot: string
           tournament_id: string
-          winner: string | null
+          winner_id: string | null
         }
         Insert: {
-          bracket_number: number
           created_at?: string
           game_number: number
           id?: string
-          loser?: string | null
-          opponent1_id?: string | null
-          opponent2_id?: string | null
+          opponent_id?: string | null
+          round_number: number
+          team_name?: string | null
           time_slot?: string
           tournament_id: string
-          winner?: string | null
+          winner_id?: string | null
         }
         Update: {
-          bracket_number?: number
           created_at?: string
           game_number?: number
           id?: string
-          loser?: string | null
-          opponent1_id?: string | null
-          opponent2_id?: string | null
+          opponent_id?: string | null
+          round_number?: number
+          team_name?: string | null
           time_slot?: string
           tournament_id?: string
-          winner?: string | null
+          winner_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "brackets_opponent1_id_fkey"
-            columns: ["opponent1_id"]
+            foreignKeyName: "brackets_opponent_id_fkey"
+            columns: ["opponent_id"]
             isOneToOne: false
             referencedRelation: "signups"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "brackets_opponent2_id_fkey"
-            columns: ["opponent2_id"]
+            foreignKeyName: "brackets_team_name_fkey"
+            columns: ["team_name"]
             isOneToOne: false
             referencedRelation: "signups"
             referencedColumns: ["id"]
@@ -244,34 +241,31 @@ export type Database = {
       }
       signups: {
         Row: {
-          applicant_name: string | null
           classroom: string | null
           created_at: string
           id: string
           name: string
+          team_name: string | null
           tournament_id: string
-          user_name: string | null
-          slug: string
+          user_id: string | null
         }
         Insert: {
-          applicant_name?: string | null
           classroom?: string | null
           created_at?: string
           id?: string
           name: string
+          team_name?: string | null
           tournament_id: string
-          user_name?: string | null
-          slug: string
+          user_id?: string | null
         }
         Update: {
-          applicant_name?: string | null
           classroom?: string | null
           created_at?: string
           id?: string
           name?: string
+          team_name?: string | null
           tournament_id?: string
-          user_name?: string | null
-          slug: string
+          user_id?: string | null
         }
         Relationships: [
           {
@@ -282,8 +276,8 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "signups_user_name_fkey"
-            columns: ["user_name"]
+            foreignKeyName: "signups_user_id_fkey"
+            columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profile"
             referencedColumns: ["id"]

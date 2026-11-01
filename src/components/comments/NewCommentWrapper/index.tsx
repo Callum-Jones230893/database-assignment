@@ -19,9 +19,7 @@ const NewCommentWrapper = ({ postId, slug, parentId }: NewCommentProps) => {
   return (
     <div className="flex flex-col items-center cursor-pointer">
       {!newComment && (
-        <div className="button" onClick={handleClick}>
-          Comment
-        </div>
+        <i className="fa-regular fa-comment fa-icon" onClick={handleClick}></i>
       )}
       {newComment && (
         <NewCommentForm

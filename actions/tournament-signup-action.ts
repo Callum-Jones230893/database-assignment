@@ -2,21 +2,20 @@
 
 import { createClient } from "@/lib/supabase/serverClient"
 import { revalidatePath } from "next/cache"
-import { getProfile } from "@/lib/supabase/queries"
 import { slugify } from "@/lib/supabase/slugify"
 
 type TournamentSignupProps = {
   name: string
   classroom: string
+  team: string
   tournamentId: string
   tournamentName: string
 }
 
-export const TournamentSignup = async ({ name, classroom, tournamentId, tournamentName }: TournamentSignupProps) => {
+export const TournamentSignup = async ({ name, classroom, team, tournamentId, tournamentName }: TournamentSignupProps) => {
   const supabase = await createClient()
   const { data: {user} } = await supabase.auth.getUser()
-  const { data: profile } = await getProfile(user!.id)
-
+  
   const slug = slugify(tournamentName)
 
   const { error } = await supabase
@@ -24,9 +23,9 @@ export const TournamentSignup = async ({ name, classroom, tournamentId, tourname
     .insert({
       tournament_id: tournamentId,
       name: name,
-      user_name: profile?.username ? profile.username : null,
+      team_name: team,
+      user_id: user?.id && user.id !== "null" ? user.id : null,
       classroom: classroom,
-      slug: slug
   })
 
   if (error) {
@@ -34,6 +33,6 @@ export const TournamentSignup = async ({ name, classroom, tournamentId, tourname
     return { error: "Failed to signup, please try again later." }
   }
 
-  revalidatePath(`/${slug}`)
+  revalidatePath(`/tournaments/${slug}`)
   return { success: true }
 }

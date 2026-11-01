@@ -26,7 +26,7 @@ const SearchBar = () => {
   }
 
   return (
-    <div className="relative">
+    <div className="hidden md:relative">
       <div className="flex w-[10%] items-center gap-5">
         <div className="">
           <input

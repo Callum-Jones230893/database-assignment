@@ -17,7 +17,7 @@ export const EditPost = async({ postData, postId }: {postData:z.infer<typeof cre
     .single()
 
   if (!data) {
-    throw new Error ("post doesnt exist")
+    throw new Error ("Post doesn't exist")
   }
   
   const images = parsedData.image
