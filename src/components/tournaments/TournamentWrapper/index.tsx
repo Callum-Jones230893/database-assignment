@@ -14,6 +14,7 @@ type TournamentWrapperProps = {
 }
 
 const TournamentWrapper = ({ tournament, signups, isCreator }: TournamentWrapperProps) => {
+  console.log(signups)
   const [generating, setGenerating] = useState<boolean>(false)
 
   return (
@@ -32,12 +33,14 @@ const TournamentWrapper = ({ tournament, signups, isCreator }: TournamentWrapper
         }
       </div>
       {tournament.generated === false && <SignupWrapper tournament={tournament} signups={signups} />}
-      <BracketDisplayWrapper
-        tournament={tournament}
-        isCreator={isCreator}
-        generating={generating}
-        setGenerating={setGenerating}
-      />
+      {signups && signups.length >= 4 &&
+        <BracketDisplayWrapper
+          tournament={tournament}
+          isCreator={isCreator}
+          generating={generating}
+          setGenerating={setGenerating}
+        />
+      }
     </div>
   )
 }

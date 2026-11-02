@@ -28,7 +28,7 @@
 }
 
 .subtitle {
-  @apply  mb-6 text-xl md:text-2xl underline decoration-accent-two decoration-2 text-center tracking-widest uppercase;
+  @apply  mb-6 text-xl md:text-2xl underline decoration-accent-two decoration-2 text-center tracking-widest uppercase font-bold;
 }
 
 .field-header {
