@@ -19,17 +19,21 @@ const generateTournament = async ({ tournamentId, slug }: GenerateTournamentProp
 
   if (!signups || signups.length === 0) throw new Error("No applicants yet.")
 
-  const filteredSignups = signups.filter((signup) => signup.tournament_id.id === tournamentId)
+  const filteredSignups = signups
 
-  const signupIds = filteredSignups.map((signup) => signup.team_name)
+  const teams = filteredSignups
+    .map((signup) => signup.team_name)
+    .filter((team, index, teams) => teams.indexOf(team) === index)
 
-  const shuffledSignup = signupIds.sort(() => Math.random() - 0.5)
+  const teamIds = teams.map((team) => filteredSignups.find((signup) => signup.team_name === team)!.id)
+
+  const shuffledTeams = teamIds.sort(() => Math.random() - 0.5)
 
   const bracketRows = []
 
-  for (let i = 0; i < shuffledSignup.length; i += 2) {
-    const teamA = shuffledSignup[i]
-    const teamB = shuffledSignup[i + 1] ?? null
+  for (let i = 0; i < shuffledTeams.length; i += 2) {
+    const teamA = shuffledTeams[i]
+    const teamB = shuffledTeams[i + 1] ?? null
 
     bracketRows.push({
       tournament_id: tournamentId,
@@ -40,7 +44,7 @@ const generateTournament = async ({ tournamentId, slug }: GenerateTournamentProp
     })
   }
 
-  let totalRounds = Math.ceil(shuffledSignup.length / 2)
+  let totalRounds = Math.ceil(shuffledTeams.length / 2)
   let round = 2
 
   while (totalRounds > 1) {
@@ -59,7 +63,7 @@ const generateTournament = async ({ tournamentId, slug }: GenerateTournamentProp
 
     round++
   }
-  
+
   const { error } = await supabase
     .from("brackets")
     .insert(bracketRows)
@@ -67,6 +71,7 @@ const generateTournament = async ({ tournamentId, slug }: GenerateTournamentProp
   if (error) throw error
 
   revalidatePath(`/${slug}`)
+  return { success: true }
 }
 
 export default generateTournament

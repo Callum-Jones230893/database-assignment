@@ -76,5 +76,5 @@
 }
 
 .icons {
-  @apply h-7.5 w-7.5 md:h-8.75 md:w-auto hover:scale-110
+  @apply h-7.5 w-7.5 md:h-8.75 md:w-auto hover:scale-110 cursor-pointer
 }

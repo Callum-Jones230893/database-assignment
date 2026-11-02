@@ -60,6 +60,7 @@ const nextBracket = async ({ bracketId, winnerId, slug }: NextBracketProps) => {
   }
 
   revalidatePath(`/${slug}`)
+  return { success: true }
 } 
 
 export default nextBracket
