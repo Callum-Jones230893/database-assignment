@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function SignupPage() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mt-20">
       <h2 className="subtitle my-4 text-center">Sign up</h2>
       <div className="flex flex-col">
         <SignUpForm />
