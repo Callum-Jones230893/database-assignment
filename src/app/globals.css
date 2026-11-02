@@ -28,7 +28,7 @@
 }
 
 .subtitle {
-  @apply  mb-6 md:text-2xl underline decoration-accent-two decoration-2 text-center tracking-widest uppercase;
+  @apply  mb-6 text-xl md:text-2xl underline decoration-accent-two decoration-2 text-center tracking-widest uppercase;
 }
 
 .field-header {
@@ -72,5 +72,9 @@
 }
 
 .input {
-  @apply w-1/2 mx-auto border border-accent-one rounded-sm p-2
+  @apply md:w-1/2 mx-auto border border-accent-one rounded-sm p-2
+}
+
+.icons {
+  @apply h-7.5 w-7.5 md:h-8.75 md:w-auto hover:scale-110
 }

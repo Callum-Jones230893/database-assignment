@@ -31,11 +31,13 @@ export const getFullPost = async (slug: string) => {
 export type SearchPostType = QueryData<ReturnType<typeof searchPosts>>
 
 export const searchPosts = async (searchTerm: string) => {
+  const search = searchTerm.trim().split(/\s+/).join(' & ')
+
   const supabase = createClient()
   return await supabase
     .from("post")
     .select(`title, slug`)
-    .textSearch(`title`, searchTerm)
+    .textSearch(`title`, `${search}`)
 }
 
 export type CommentType = QueryData<ReturnType<typeof getComment>>
@@ -55,7 +57,7 @@ export const getTournament = async (slug: string) => {
   const supabase = await createClient()
   return supabase
     .from("tournament")
-    .select(`id, tournament_name, slug, created_by("id", "username")`)
+    .select(`id, tournament_name, slug, generated, created_by("id", "username")`)
     .eq(`slug`, slug)
     .single()
 }

@@ -48,6 +48,7 @@ export type Database = {
         Row: {
           created_at: string
           game_number: number
+          has_winner: boolean
           id: string
           opponent_id: string | null
           round_number: number
@@ -59,6 +60,7 @@ export type Database = {
         Insert: {
           created_at?: string
           game_number: number
+          has_winner?: boolean
           id?: string
           opponent_id?: string | null
           round_number: number
@@ -70,6 +72,7 @@ export type Database = {
         Update: {
           created_at?: string
           game_number?: number
+          has_winner?: boolean
           id?: string
           opponent_id?: string | null
           round_number?: number
@@ -288,22 +291,31 @@ export type Database = {
         Row: {
           created_at: string
           created_by: string
+          end_date: string | null
+          generated: boolean
           id: string
           slug: string | null
+          start_date: string | null
           tournament_name: string
         }
         Insert: {
           created_at?: string
           created_by: string
+          end_date?: string | null
+          generated?: boolean
           id?: string
           slug?: string | null
+          start_date?: string | null
           tournament_name: string
         }
         Update: {
           created_at?: string
           created_by?: string
+          end_date?: string | null
+          generated?: boolean
           id?: string
           slug?: string | null
+          start_date?: string | null
           tournament_name?: string
         }
         Relationships: [

@@ -6,9 +6,7 @@ import { SetStateAction, useState } from "react"
 
 const SearchBar = () => {
   const [search, setSearch] = useState<string>("")
-  const [searchResults, setSearchResults] = useState<SearchPostType | null>(
-    null,
-  )
+  const [searchResults, setSearchResults] = useState<SearchPostType | null>(null)
 
   const handleChange = (e: { target: { value: SetStateAction<string> } }) => {
     setSearch(e.target.value)
@@ -18,6 +16,7 @@ const SearchBar = () => {
     const { data, error } = await searchPosts(search)
     if (error) throw new Error()
     setSearchResults(data)
+    console.log(searchResults)
   }
 
   const handleClear = () => {
@@ -25,8 +24,9 @@ const SearchBar = () => {
     setSearch("")
   }
 
+
   return (
-    <div className="hidden md:relative">
+    <div className="relative">
       <div className="flex w-[10%] items-center gap-5">
         <div className="">
           <input
@@ -36,7 +36,7 @@ const SearchBar = () => {
             onChange={handleChange}
           />
         </div>
-        <button><i className="fa-regular fa-circle-check fa-icon"></i></button>
+        <button onClick={handleClick}><i className="fa-regular fa-circle-check fa-icon"></i></button>
       </div>
       {searchResults && (
         <div className="absolute left-0 top-full">

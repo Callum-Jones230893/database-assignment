@@ -9,6 +9,7 @@ import z from "zod"
 import { useState } from "react"
 import { HostTournament } from "@/actions/host-tournament-action"
 import ConfirmationModal from "@/components/ConfirmationModal"
+import { redirect } from "next/navigation"
 
 export type TournamentValues = z.infer<typeof createTournamentSchema>
 
@@ -45,6 +46,7 @@ const NewTournament = () => {
 
   const handleClick = () => {
     setNewTournament(false)
+    redirect("/tournaments")
   }
 
   return (
@@ -58,15 +60,13 @@ const NewTournament = () => {
         <input {...register("title")} placeholder="title..." className="input" />
         {errors.title && <ErrorMessage error={errors.title.message!}/>}
 
-        <div className="flex justify-between w-1/2 mx-auto py-10">
+        <div className="flex justify-between w-[90%] md:w-1/2 mx-auto py-10">
           <button><i className="fa-regular fa-circle-check fa-icon"></i></button>
           {error && <p>{error.message}</p>}
 
-          <div className="button cursor-pointer" onClick={handleClick}>
-            Cancel
-          </div>
+          <div onClick={handleClick}><i className="fa-regular fa-circle-xmark fa-icon"></i></div>
         </div>
-        {confirmOpen && <ConfirmationModal handleConfirmation={handleConfirmation} setNewChange={setNewTournament} />}
+        {confirmOpen && <ConfirmationModal handleConfirmation={handleConfirmation} setNewChange={setConfirmOpen} />}
       </form>
     </div>
   )

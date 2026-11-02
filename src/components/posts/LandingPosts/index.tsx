@@ -25,7 +25,7 @@ const LandingPosts = ({ posts }: LandingPostProps) => {
 
   return (
     <div className="flex-col w-8/10 mb-10">
-      <h2 className="mb-4 md:text-2xl">Latest Posts</h2>
+      <h2 className="subtitle">Latest Posts</h2>
       {data &&
         data.map((post) => (
           <Link

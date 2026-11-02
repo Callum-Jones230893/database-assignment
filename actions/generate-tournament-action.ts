@@ -1,9 +1,15 @@
 "use server"
 
+import { revalidatePath } from "next/cache"
 import { getSignups } from "../src/lib/supabase/queries"
 import { createClient } from "../src/lib/supabase/serverClient"
 
-const generateTournament = async (tournamentId: string) => {
+type GenerateTournamentProps = {
+  tournamentId: string
+  slug: string
+}
+
+const generateTournament = async ({ tournamentId, slug }: GenerateTournamentProps) => {
   const supabase = await createClient()
   
   const { data: signups, error: signupError} = await getSignups(tournamentId)
@@ -58,6 +64,8 @@ const generateTournament = async (tournamentId: string) => {
     .insert(bracketRows)
   
   if (error) throw error
+
+  revalidatePath(`/${slug}`)
 }
 
 export default generateTournament

@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache"
 
 type NextBracketProps = {
   bracketId: string
-  winnerId: string
+  winnerId: string | null
   slug: string
 }
 
@@ -27,7 +27,8 @@ const nextBracket = async ({ bracketId, winnerId, slug }: NextBracketProps) => {
   const { error: updateError } = await supabase
     .from("brackets")
     .update({ 
-      winner_id: winnerId 
+      winner_id: winnerId,
+      has_winner: true
     })
     .eq("id", bracketId)
 
@@ -58,7 +59,7 @@ const nextBracket = async ({ bracketId, winnerId, slug }: NextBracketProps) => {
     if (nextRoundError) throw nextRoundError
   }
 
-  revalidatePath(`/tournaments/${slug}`)
+  revalidatePath(`/${slug}`)
 } 
 
 export default nextBracket

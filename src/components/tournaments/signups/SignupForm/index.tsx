@@ -45,6 +45,7 @@ const TournamentSignupForm = ({ tournamentId, tournamentName, setFormOpen }: Tou
         tournamentId,
         tournamentName
       })
+      setFormOpen(false)
     }
     setConfirmOpen(false)
   }
@@ -54,29 +55,29 @@ const TournamentSignupForm = ({ tournamentId, tournamentName, setFormOpen }: Tou
   }
 
   return (
-    <div className="flex flex-col w-3/4">
+    <div className="flex flex-col md:w-3/4">
       <form
         onSubmit={handleSubmit(handlePreConfirmation)}
         onClick={(e) => e.stopPropagation()}
         className="application-form gap-5"
       >
         <label htmlFor="title" className="field-header">Name</label>
-        <input {...register("name")} placeholder="Name..." className="input w-1/2 mx-auto pb-3 md:pb-6 " />
+        <input {...register("name")} placeholder="Name..." className="input" />
         {errors.name && <ErrorMessage error={errors.name.message!}/>}
 
         <label htmlFor="image" className="field-header">Class</label>
-        <input {...register("classroom")} placeholder="Class..." className="input w-1/2 mx-auto pb-3 md:pb-6" />
+        <input {...register("classroom")} placeholder="Class..." className="input" />
         {errors.classroom && <ErrorMessage error={errors.classroom.message!} />}
 
         <label htmlFor="image" className="field-header">Team Name</label>
-        <input {...register("team")} placeholder="Team name..." className="input w-1/2 mx-auto pb-3 md:pb-6" />
+        <input {...register("team")} placeholder="Team name..." className="input" />
         {errors.team && <ErrorMessage error={errors.team.message!} />}
 
         <div className="flex justify-between w-1/2 md:w-1/4 mx-auto py-10">
           <button><i className="fa-regular fa-circle-check fa-icon"></i></button>
           {error && <p>{error.message}</p>}
 
-          <button><i className="fa-regular fa-circle-check fa-icon"></i></button>
+          <div onClick={handleClick}><i className="fa-regular fa-circle-xmark fa-icon"></i></div>
         </div>
         {confirmOpen && <ConfirmationModal handleConfirmation={handleConfirmation} setNewChange={setConfirmOpen} />}
       </form>

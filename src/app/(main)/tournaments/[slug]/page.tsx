@@ -3,6 +3,8 @@ import { getSignups, getTournament } from "@/lib/supabase/queries"
 import { createClient } from "@/lib/supabase/serverClient"
 
 const TournamentPage = async ({ params }: { params: { slug: string } }) => {
+  
+
   const { slug } = await params
   const supabase = await createClient()
 

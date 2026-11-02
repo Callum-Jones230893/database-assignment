@@ -10,7 +10,7 @@ export const EditPost = async({ postData, postId }: {postData:z.infer<typeof cre
   const parsedData = createPostSchema.parse(postData)
   const supabase = await createClient()
 
-  const {data, error} = await supabase
+  const { data, error } = await supabase
     .from("post")
     .select("*")
     .eq("id", postId)
