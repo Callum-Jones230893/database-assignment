@@ -40,6 +40,9 @@ const UserLinks = async () => {
             <Link href="/auth/signup">
               <Image src={signupIcon} alt="Signup" height={100} width={100} className="icons"/>
             </Link>
+            <Link href="/tournaments">
+              <Image src={tournamentsIcon} alt="View tournaments" height={100} width={100} className="icons"/>
+            </Link>
           </>
       }
     </div>
