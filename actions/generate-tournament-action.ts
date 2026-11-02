@@ -71,7 +71,7 @@ const generateTournament = async ({ tournamentId, slug }: GenerateTournamentProp
   if (error) throw error
 
   revalidatePath(`/${slug}`)
-  return { success: true }
+  redirect(slug)
 }
 
 export default generateTournament
