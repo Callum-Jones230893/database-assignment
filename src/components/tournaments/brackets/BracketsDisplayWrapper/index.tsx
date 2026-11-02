@@ -20,7 +20,6 @@ const BracketsDisplayWrapper = ({ tournament, isCreator, generating, setGenerati
 
   const { data: brackets, refetch } = useQuery({
     queryKey: ["brackets", tournament.id],
-    refetchInterval: 500,
     queryFn: async () => {
       const { data, error } = await getBrackets(tournamentId)
       if (error) throw new Error()
@@ -28,7 +27,7 @@ const BracketsDisplayWrapper = ({ tournament, isCreator, generating, setGenerati
     }
   })
 
-  const isGenerated = brackets && brackets.length > 0
+  const isGenerated = brackets && brackets.length > 0 && tournament.generated === true
 
   const handlePopulation = async () => {
     setGenerating(true)
