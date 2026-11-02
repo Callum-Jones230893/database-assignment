@@ -31,7 +31,7 @@ const BracketsDisplayWrapper = ({ tournament, isCreator, generating, setGenerati
     setGenerating(true)
     try {
       await generateTournament({tournamentId, slug})
-      setGenerated(tournamentId, slug)
+      await setGenerated(tournamentId, slug)
     } catch (error) {
       console.log("Error genertating brackets", error)
     } finally {

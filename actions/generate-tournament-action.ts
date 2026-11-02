@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache"
 import { getSignups } from "../src/lib/supabase/queries"
 import { createClient } from "../src/lib/supabase/serverClient"
-import { redirect } from "next/navigation"
 
 type GenerateTournamentProps = {
   tournamentId: string
