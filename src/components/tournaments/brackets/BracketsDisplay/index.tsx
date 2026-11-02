@@ -17,9 +17,13 @@ const BracketsDisplay = ({ brackets, slug }: BracketDisplayProps) => {
           {matches?.map((match) => (
             <div key={match.id} className="border border-accent-one p-3 space-y-2">
               <div onClick={() => match.team_name && !match.has_winner && nextBracket({bracketId: match.id, winnerId: match.team_name, slug})}
-                className="border border-accent-one p-4 hover:border-button-one">{match.team_name ?? "TBD"}</div>
+                className="border border-accent-one p-4 hover:border-button-one">
+                {match.team?.team_name ?? "TBD"}
+              </div>
               <div onClick={() => match.opponent_id && !match.has_winner && nextBracket({bracketId: match.id, winnerId: match.opponent_id, slug})}
-                className="border border-accent-one p-4 hover:border-button-one">{match.opponent_id ?? "TBD"}</div>
+                className="border border-accent-one p-4 hover:border-button-one">
+                {match.opponent?.team_name ?? "TBD"}
+              </div>
             </div>
           ))}
         </div>

@@ -1,7 +1,7 @@
 "use server"
 
 import { createClient } from "@/lib/supabase/serverClient"
-import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
 export const DeleteComment = async (commentId: string) => {
   const supabase = await createClient();
@@ -9,7 +9,6 @@ export const DeleteComment = async (commentId: string) => {
     .from("comments")
     .delete()
     .eq("id", commentId)
-    .throwOnError()
     
-  redirect("/")
+  revalidatePath("/")
 }

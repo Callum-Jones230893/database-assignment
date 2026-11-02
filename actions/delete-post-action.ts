@@ -1,7 +1,6 @@
 "use server"
 
 import { createClient } from "@/lib/supabase/serverClient"
-import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
 export const DeletePost = async (postId: string) => {
@@ -12,6 +11,5 @@ export const DeletePost = async (postId: string) => {
     .eq("id", postId)
     .throwOnError()
     
-  revalidatePath("/")
   redirect("/")
 }

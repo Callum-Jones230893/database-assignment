@@ -21,7 +21,7 @@ const generateTournament = async ({ tournamentId, slug }: GenerateTournamentProp
 
   const filteredSignups = signups.filter((signup) => signup.tournament_id.id === tournamentId)
 
-  const signupIds = filteredSignups.map((signup) => signup.id)
+  const signupIds = filteredSignups.map((signup) => signup.team_name)
 
   const shuffledSignup = signupIds.sort(() => Math.random() - 0.5)
 

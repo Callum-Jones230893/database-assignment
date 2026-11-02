@@ -7,6 +7,7 @@ export const getLandingPosts = async (supabase: ReturnType<typeof createClient>)
   return await supabase
     .from("post")
     .select(`id, title, slug, author("id", "username")`)
+    .order("created_at", { ascending: false })
 }
 
 export type HostedTournamentsType = QueryData<ReturnType<typeof getHostedTournaments>>
@@ -15,6 +16,7 @@ export const getHostedTournaments = async (supabase: ReturnType<typeof createCli
   return await supabase
     .from("tournament")
     .select(`id, tournament_name, slug, created_by("id", "username")`)
+    .order("created_at", { ascending: false })
 }
 
 export type FullPostType = QueryData<ReturnType<typeof getFullPost>>
@@ -68,7 +70,11 @@ export const getBrackets = async (tournamentId: string) => {
   const supabase = await createClient()
   return supabase
     .from("brackets")
-    .select("*")
+    .select(`
+      *,
+      team:signups!brackets_team_name_fkey(team_name),
+      opponent:signups!brackets_opponent_id_fkey(team_name)
+    `)
     .eq("tournament_id", tournamentId)
 }
 

@@ -7,7 +7,7 @@ export const loginSchema = z.object({
 
 export const createPostSchema = z.object({
   title: z.string().min(6, "Please enter a valid title of atleast six characters."),
-  content: z.string().min(20, "Please have some content."),
+  content: z.string().min(20, "Please enter a comment containing atleast 20 characters."),
   image: z.union([z.instanceof(File), z.array(z.instanceof(File))]).optional(),
 })
 
