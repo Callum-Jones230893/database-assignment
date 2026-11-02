@@ -18,7 +18,6 @@ const LoginForm = () => {
   const { mutate, error } = useMutation({
     mutationFn: Login,
   })
-  console.log("mutation error", error)
 
   return (
     <div>

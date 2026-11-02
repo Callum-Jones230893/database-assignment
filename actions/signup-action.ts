@@ -21,5 +21,4 @@ export const SignUp = async (userdata:z.infer<typeof signUpSchema>) => {
   } 
 
   redirect("/")
-  return { success: true }
 }

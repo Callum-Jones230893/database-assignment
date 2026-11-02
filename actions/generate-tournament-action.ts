@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache"
 import { getSignups } from "../src/lib/supabase/queries"
 import { createClient } from "../src/lib/supabase/serverClient"
-import { redirect } from "next/navigation"
 
 type GenerateTournamentProps = {
   tournamentId: string
@@ -71,7 +70,7 @@ const generateTournament = async ({ tournamentId, slug }: GenerateTournamentProp
   if (error) return { success: false }
 
   revalidatePath(`/tournament/${slug}`)
-  redirect(`/tournament/${slug}`)
+  return { success: true }
 }
 
 export default generateTournament
