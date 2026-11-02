@@ -2,7 +2,7 @@
 
 import { getBrackets, TournamentType } from "@/lib/supabase/queries"
 import generateTournament from "@/actions/generate-tournament-action"
-import { Dispatch, SetStateAction, useEffect } from "react"
+import { Dispatch, SetStateAction } from "react"
 import BracketsDisplay from "../BracketsDisplay"
 import { useQuery } from "@tanstack/react-query"
 import { setGenerated } from "@/actions/set-generated-action"
@@ -20,12 +20,15 @@ const BracketsDisplayWrapper = ({ tournament, isCreator, generating, setGenerati
 
   const { data: brackets, refetch } = useQuery({
     queryKey: ["brackets", tournament.id],
+    refetchInterval: 500,
     queryFn: async () => {
       const { data, error } = await getBrackets(tournamentId)
       if (error) throw new Error()
       return data
     }
   })
+
+  const isGenerated = brackets && brackets.length > 0
 
   const handlePopulation = async () => {
     setGenerating(true)
@@ -45,12 +48,12 @@ const BracketsDisplayWrapper = ({ tournament, isCreator, generating, setGenerati
     <>
       {brackets && 
         <div>
-          {isCreator &&  tournament.generated === false &&
+          {isCreator &&  !isGenerated &&
             <div onClick={handlePopulation} className="w-full py-2 px-4 text-2xl text-center">
               {generating ? <p>Generating...</p> : <p className="cursor-pointer hover:scale-110">Generate</p>}
             </div>
           }
-          {tournament.generated === true && <BracketsDisplay brackets={brackets} slug={`/tournaments/${slug}`} />}
+          {isGenerated && <BracketsDisplay brackets={brackets} slug={`/tournaments/${slug}`} />}
         </div>
       }
     </>

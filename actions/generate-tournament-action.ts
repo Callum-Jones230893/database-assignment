@@ -71,7 +71,7 @@ const generateTournament = async ({ tournamentId, slug }: GenerateTournamentProp
     return { success: false, error: error.message }
   }
 
-  revalidatePath(`/tournament/${slug}`)
+  revalidatePath(`/tournaments/${slug}`)
   return { success: true }
 }
 
