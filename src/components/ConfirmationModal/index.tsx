@@ -10,7 +10,7 @@ const ConfirmModal = ({ handleConfirmation, setNewChange }: ConfirmationModalPro
     <div className="fixed flex-col inset-0 z-55 flex items-center justify-center bg-black/50 p-4 gap-10 h-full">
       <p>Would you like to proceed?</p>
       <div className="flex gap-10 z-100">
-        <span onClick={() => handleConfirmation(true)}>Confirm</span>
+        <span onClick={() => handleConfirmation(true)} className="cursor-pointer">Confirm</span>
         <span onClick={() => setNewChange(false)} className="cursor-pointer">Cancel</span>
       </div>
     </div>
