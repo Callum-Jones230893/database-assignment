@@ -26,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <body className="min-h-screen flex flex-col bg-background text-accent-one">
+      <body className="flex flex-col bg-background text-accent-one">
         <QueryClientProvider>
           <Toaster />
           <div className="flex flex-1 flex-col w-full text-text-primary">

@@ -14,7 +14,7 @@ const PostPage = async ({ params }: { params: { slug: string } }) => {
   const isAuthor: boolean = user && data && user.id === data.author.id ? true : false
 
   return (
-    <div className={`flex flex-col w-full gap-10`}>
+    <div className={`flex flex-col w-full gap-10 pb-10`}>
       {data && <PostWrapper comments={comments} user={user} data={data} slug={slug} isAuthor={isAuthor} /> }
     </div>
   )

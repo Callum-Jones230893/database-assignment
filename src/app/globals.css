@@ -16,6 +16,7 @@
   --color-foreground: linen;
   --color-accent-one: darkslategray;
   --color-accent-two: #fa7000;
+  --color-button-one: #4E8383
 }
 
 :root {
@@ -67,5 +68,9 @@
 }
 
 .fa-icon {
-  @apply cursor-pointer text-accent-one hover:text-accent-two transition-all duration-300 ease-in-out hover:scale-125
+  @apply cursor-pointer text-button-one text-[20px] hover:text-accent-two transition-all duration-300 ease-in-out hover:scale-125 m-2
+}
+
+.input {
+  @apply w-1/2 mx-auto border border-accent-one rounded-sm p-2
 }

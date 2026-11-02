@@ -3,15 +3,15 @@ import Link from "next/link";
 
 export default function LoginPage() {
   return (
-    <div className="flex flex-col m-auto">
-      <h2 className="heading my-4 text-center">Login</h2>
+    <div className="flex flex-col">
+      <h2 className="subtitle my-4 text-center">Login</h2>
       <div className="flex flex-col">
         <LoginForm />
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-center">
           <span>Don't have an account?</span>
           <Link href="/auth/signup">
             <span className="font-bold">
-              Sign up
+              Sign up here
             </span>
           </Link>
         </div>

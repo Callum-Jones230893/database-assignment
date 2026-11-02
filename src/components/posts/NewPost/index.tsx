@@ -59,36 +59,28 @@ const NewPost = () => {
   const handleConfirmation = () => {
     storedValues && mutate(storedValues)
     setConfirmOpen(false)
-  }
-
-  const handleClick = () => {
-    setNewPost(false)
-  }
+  } 
 
   return (
     <div className="flex flex-col">
       <form onSubmit={handleSubmit(handlePreConfirmation)} className="post-form">
         <label htmlFor="title" className="field-header">Title</label>
-        <input {...register("title")} placeholder="title..." className="input w-1/2 mx-auto pb-3 md:pb-6" />
+        <input {...register("title")} placeholder="title..." className="input" />
         {errors.title && <ErrorMessage error={errors.title.message!}/>}
 
         <label htmlFor="content" className="field-header">Content</label>
-        <textarea {...register("content")} className="input w-1/2 mx-auto pb-3 md:pb-6" />
+        <textarea {...register("content")} className="input" />
         {errors.content && <ErrorMessage error={errors.content.message!} />}
 
         <label htmlFor="image" className="field-header">Insert an image</label>
-        <input type="file" multiple {...register("image")} className="input w-1/2 mx-auto pb-3 md:pb-6 " />
+        <input type="file" multiple {...register("image")} className="input cursor-pointer" />
         {errors.image && <ErrorMessage error={errors.image.message!} />}
 
-        <div className="flex justify-between w-1/2 mx-auto py-10">
-          <button className="button cursor-pointer">Submit</button>
+        <div className="flex justify-center w-1/2 mx-auto py-10">
+          <button><i className="fa-regular fa-circle-check fa-icon"></i></button>
           {error && <p>{error.message}</p>}
-
-          <div className="button cursor-pointer" onClick={handleClick}>
-            Cancel
-          </div>
         </div>
-        {confirmOpen && <ConfirmationModal handleConfirmation={handleConfirmation} setNewChange={setNewPost} />}
+        {confirmOpen && <ConfirmationModal handleConfirmation={handleConfirmation} setNewChange={setConfirmOpen} />}
       </form>
     </div>
   )

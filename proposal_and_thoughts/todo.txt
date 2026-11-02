@@ -19,3 +19,5 @@ Add timed function for applicants to populate brackets
 Click on bracket winner to move to next - logic done i think
 
 Check error handling and change schemas
+
+change signup form and login form

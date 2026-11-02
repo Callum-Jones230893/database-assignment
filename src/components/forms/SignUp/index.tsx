@@ -19,17 +19,17 @@ const SignUpForm = () => {
   console.log("mutation error", error)
 
   return (
-    <div>
-      <form  onSubmit={handleSubmit((values) => mutate(values))} className="flex flex-col w-md m-auto p-10 border border-sushi rounded-2xl mb-4">
-        <label htmlFor="username">Enter a username</label>
+    <div className="flex flex-col">
+      <form onSubmit={handleSubmit((values) => mutate(values))} className="post-form">
+        <label htmlFor="username" className="field-header">Enter a username</label>
         <input {...register("username")} placeholder="Username..." className="input" />
         {errors.username && <ErrorMessage error={errors.username.message!} />}
 
-        <label htmlFor="email">Enter your email</label>
+        <label htmlFor="email" className="field-header">Enter your email</label>
         <input {...register("email")} placeholder="Email..." className="input" />
         {errors.email && <ErrorMessage error={errors.email.message!} />}
 
-        <label htmlFor="password">Enter a password</label>
+        <label htmlFor="password" className="field-header">Enter a password</label>
         <input {...register("password")} type="password" placeholder="Password..." className="input" />
         {errors.password && <ErrorMessage error={errors.password.message!} />}
 

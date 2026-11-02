@@ -23,6 +23,8 @@ const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormPr
   const [storedValues, setStoredValues] = useState<CommentValues | null>(null)
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false)
 
+
+
   const { register, handleSubmit, formState: { errors }, } = useForm<CommentValues>({
     resolver: zodResolver(commentSchema),
   })
@@ -54,7 +56,7 @@ const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormPr
   }
 
   return (
-    <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm" onClick={handleClick}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm" onClick={handleClick}>
       <form
         onSubmit={handleSubmit(handlePreConfirmation)}
         onClick={(e) => e.stopPropagation()}
@@ -68,14 +70,12 @@ const NewCommentForm = ({ postId, slug, setNewComment, parentId }: CommentFormPr
         {errors.content && <p>{errors.content.message}</p>}
 
         <div className="flex justify-between w-[90%]">
-          <button className="button cursor-pointer">Comment</button>
+          <button><i className="fa-regular fa-circle-check fa-icon"></i></button>
           {error && <p>{error.message}</p>}
 
-          <div className="button cursor-pointer" onClick={handleClick}>
-            Cancel
-          </div>
+          <div onClick={handleClick}><i className="fa-regular fa-circle-xmark fa-icon"></i></div>
         </div>
-        {confirmOpen && <ConfirmationModal handleConfirmation={handleConfirmation} setNewChange={setNewComment} />}
+        {confirmOpen && <ConfirmationModal handleConfirmation={handleConfirmation} setNewChange={setConfirmOpen} />}
       </form>
     </div>
   )

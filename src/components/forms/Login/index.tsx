@@ -20,12 +20,12 @@ const LoginForm = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit((values) => mutate(values))} className="flex flex-col w-md m-auto p-10 border border-black rounded-2xl mb-4">
-        <label htmlFor="email">Enter your email</label>
+      <form onSubmit={handleSubmit((values) => mutate(values))} className="post-form">
+        <label htmlFor="email" className="field-header">Enter your email</label>
         <input {...register("email")} placeholder="Email..." className="input" />
         {errors.email && <ErrorMessage error={errors.email.message!}/>}
 
-        <label htmlFor="password">Enter a password</label>
+        <label htmlFor="password" className="field-header">Enter a password</label>
         <input {...register("password")} type="password" placeholder="Password..." className="input" />
         {errors.password && <ErrorMessage error={errors.password.message!} />}
 

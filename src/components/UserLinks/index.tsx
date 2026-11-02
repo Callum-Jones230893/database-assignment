@@ -15,10 +15,8 @@ const UserLinks = async () => {
         ? 
           <div className="flex items-center gap-5">
             <div onClick={Logout}><i className="fa-solid fa-arrow-right-from-bracket fa-icon"></i></div>
-            {/* <Link href="/createPost"><i className="fa-solid fa-blog fa-icon"></i></Link> */}
-            <Link href="/createPost"><Image src={create_post} alt="Create a post" className="max-w-[45px] h-[35px]"  /></Link>
-            {/* <Link href="/tournaments"><i className="fa-solid fa-trophy fa-icon"></i></Link> */}
-            <Link href="/createPost"><Image src={tournaments} alt="Tournaments" className="max-w-[45px] h-[38px]" /></Link>
+            <Link href="/createPost"><i className="fa-solid fa-blog fa-icon"></i></Link>
+            <Link href="/tournaments"><i className="fa-solid fa-trophy fa-icon"></i></Link>
             <Link href="/createTournament" className="flex items-center h-10 cursor-pointer">Host Tournament</Link>
           </div>
         : 

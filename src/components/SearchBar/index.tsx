@@ -36,9 +36,7 @@ const SearchBar = () => {
             onChange={handleChange}
           />
         </div>
-        <button onClick={handleClick} className="cursor-pointer">
-          Submit
-        </button>
+        <button><i className="fa-regular fa-circle-check fa-icon"></i></button>
       </div>
       {searchResults && (
         <div className="absolute left-0 top-full">

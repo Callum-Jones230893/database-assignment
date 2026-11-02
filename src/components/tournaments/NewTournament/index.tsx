@@ -55,11 +55,11 @@ const NewTournament = () => {
         className="post-form"
       >
         <label htmlFor="title" className="field-header">Tournament title</label>
-        <input {...register("title")} placeholder="title..." className="input w-1/2 mx-auto pb-3 md:pb-6" />
+        <input {...register("title")} placeholder="title..." className="input" />
         {errors.title && <ErrorMessage error={errors.title.message!}/>}
 
         <div className="flex justify-between w-1/2 mx-auto py-10">
-          <button className="button cursor-pointer">Submit</button>
+          <button><i className="fa-regular fa-circle-check fa-icon"></i></button>
           {error && <p>{error.message}</p>}
 
           <div className="button cursor-pointer" onClick={handleClick}>

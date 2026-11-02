@@ -51,11 +51,11 @@ const EditPageForm = ({ initialValues, postId }: {initialValues: Pick<Tables<"po
       })} 
         className="post-form">
         <label htmlFor="title" className="field-header">Title</label>
-        <input {...register("title")} placeholder="title..." className="input w-1/2 mx-auto pb-3 md:pb-6" />
+        <input {...register("title")} placeholder="title..." className="input " />
         {errors.title && <ErrorMessage error={errors.title.message!}/>}
 
         <label htmlFor="content" className="field-header">Content</label>
-        <textarea {...register("content")} className="input w-1/2 mx-auto pb-3 md:pb-6"/>
+        <textarea {...register("content")} className="input"/>
         {errors.content && <ErrorMessage error={errors.content.message!} />}
 
         <div className="grid grid-cols-3 grid-auto-flow-row w-1/2 mx-auto my-5 gap-y-10">
@@ -68,11 +68,11 @@ const EditPageForm = ({ initialValues, postId }: {initialValues: Pick<Tables<"po
         
 
         <label htmlFor="image" className="field-header">Update your image</label>
-        <input type="file" multiple {...register("image")} className="input w-1/2 mx-auto pb-3 md:pb-6" />
+        <input type="file" multiple {...register("image")} className="input cursor-pointer" />
         {errors.image && <ErrorMessage error={errors.image.message!} />}
 
         <div className="flex justify-center w-1/2 mx-auto py-10">
-          <button className="button cursor-pointer">Submit</button>
+          <button><i className="fa-regular fa-circle-check fa-icon"></i></button>
           {error && <p>{error.message}</p>}
         </div>
       </form>

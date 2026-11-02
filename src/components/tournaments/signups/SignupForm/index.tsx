@@ -73,12 +73,10 @@ const TournamentSignupForm = ({ tournamentId, tournamentName, setFormOpen }: Tou
         {errors.team && <ErrorMessage error={errors.team.message!} />}
 
         <div className="flex justify-between w-1/2 md:w-1/4 mx-auto py-10">
-          <button className="button cursor-pointer">Submit</button>
+          <button><i className="fa-regular fa-circle-check fa-icon"></i></button>
           {error && <p>{error.message}</p>}
 
-          <div className="button cursor-pointer" onClick={handleClick}>
-            Cancel
-          </div>
+          <button><i className="fa-regular fa-circle-check fa-icon"></i></button>
         </div>
         {confirmOpen && <ConfirmationModal handleConfirmation={handleConfirmation} setNewChange={setConfirmOpen} />}
       </form>
