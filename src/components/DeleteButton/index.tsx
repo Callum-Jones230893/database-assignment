@@ -13,7 +13,7 @@ const DeleteButton = ({ id, mutateFn, successMessage = "Successfully deleted" }:
 
   const { mutate } = useMutation({
     mutationFn: mutateFn,
-    onSettled: () => toast.success(successMessage),
+    onSuccess: () => toast.success(successMessage),
     onError: () => toast.error("Error, please try again."),
   })
 
