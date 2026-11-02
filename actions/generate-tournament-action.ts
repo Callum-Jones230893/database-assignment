@@ -67,7 +67,9 @@ const generateTournament = async ({ tournamentId, slug }: GenerateTournamentProp
     .from("brackets")
     .insert(bracketRows)
   
-  if (error) return { success: false }
+  if (error) {
+    return { success: false, error: error.message }
+  }
 
   revalidatePath(`/tournament/${slug}`)
   return { success: true }
