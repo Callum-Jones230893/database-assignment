@@ -18,10 +18,10 @@ const BracketsDisplayWrapper = ({ tournament, isCreator, generating, setGenerati
   const tournamentId = tournament?.id
   const slug = tournament.slug!
 
-  const { data: brackets } = useQuery({
+  const { data: brackets, refetch } = useQuery({
     queryKey: ["brackets", tournament.id],
     queryFn: async () => {
-      const { data, error } = await getBrackets(tournament.id)
+      const { data, error } = await getBrackets(tournamentId)
       if (error) throw new Error()
       return data
     }
@@ -32,6 +32,8 @@ const BracketsDisplayWrapper = ({ tournament, isCreator, generating, setGenerati
     try {
       await generateTournament({tournamentId, slug})
       await setGenerated(tournamentId, slug)
+
+      await refetch()
     } catch (error) {
       console.log("Error genertating brackets", error)
     } finally {
