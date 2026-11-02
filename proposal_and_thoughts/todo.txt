@@ -6,18 +6,25 @@ Check that original Poster can delete peoples comments
 
 Add roles - done
 
-Make cascading delete triggers ??
+Make cascading delete triggers - done
 
 Import bracket library - done -- removed
 
-Create tournament display after generation
+Create tournament display after generation - done
 
 Add application fields - added signups
 
 Add timed function for applicants to populate brackets
 
-Click on bracket winner to move to next - logic done i think
+Click on bracket winner to move to next - logic done i think - done
 
-Check error handling and change schemas
+Check error handling and change schemas - done
 
-change signup form and login form
+change signup form and login form - done
+
+Add winner after all games played
+
+Change ids in brackets to names
+
+Add start / finish date to front end -
+
