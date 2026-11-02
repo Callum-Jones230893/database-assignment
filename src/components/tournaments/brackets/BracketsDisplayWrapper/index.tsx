@@ -20,6 +20,7 @@ const BracketsDisplayWrapper = ({ tournament, isCreator, generating, setGenerati
 
   const { data: brackets, refetch } = useQuery({
     queryKey: ["brackets", tournament.id],
+    refetchInterval: 300, 
     queryFn: async () => {
       const { data, error } = await getBrackets(tournamentId)
       if (error) throw new Error()
