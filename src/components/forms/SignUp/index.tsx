@@ -6,6 +6,8 @@ import { SignUp } from "../../../../actions/signup-action";
 import { signUpSchema } from "../../../../actions/schemas";
 import ErrorMessage from "@/components/ErrorMessage";
 import { useMutation } from "@tanstack/react-query";
+import Image from 'next/image'
+import signupIcon from "@/public/images/icons/sign_up.png"
 
 const SignUpForm = () => {
 
@@ -33,7 +35,9 @@ const SignUpForm = () => {
         <input {...register("password")} type="password" placeholder="Password..." className="input" />
         {errors.password && <ErrorMessage error={errors.password.message!} />}
 
-        <button className="button cursor-pointer">Signup</button>
+        <button className="flex justify-center">
+          <Image src={signupIcon} alt="Login" height={100} width={100} className="icons"/>
+        </button>
         {error && <ErrorMessage error={error.message} />}
       </form>
     </div>

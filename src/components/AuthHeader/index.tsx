@@ -1,12 +1,13 @@
 import Link from "next/link"
+import Image from "next/image"
+import logo from "@/public/images/tournament_logo_top_right_shield_ribbon.png"
 
 const AuthHeader = () => {
   return (
     <header className="flex items-center gap-20 p-5 justify-between border-b-4 border-accent-one">
       <div className="flex flex-col">
-        <Link href="/" className="button hover:scale-110 duration-75">
-          <h1 className="text-2xl">Tournament</h1>
-          <h2 className="text-xl">Generator</h2>
+        <Link href="/" className="inline-flex h-20 items-center hover:scale-110 transition duration-75">
+          <Image src={logo} alt="Website logo" width={100} height={100} className="object-contain p-2" />
         </Link>
       </div>
     </header>

@@ -7,7 +7,7 @@ export default function LoginPage() {
       <h2 className="subtitle my-4 text-center">Login</h2>
       <div className="flex flex-col">
         <LoginForm />
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col items-center justify-center">
           <span>Don't have an account?</span>
           <Link href="/auth/signup">
             <span className="font-bold">

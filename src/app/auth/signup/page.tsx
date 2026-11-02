@@ -7,7 +7,7 @@ export default function SignupPage() {
       <h2 className="subtitle my-4 text-center">Sign up</h2>
       <div className="flex flex-col">
         <SignUpForm />
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col items-center justify-center">
           <span>Already have an account?</span>
           <Link href="/auth/login">
             <span className="font-bold">
