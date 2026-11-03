@@ -2,7 +2,7 @@ Make modal for confirmation (deletetion, changes etc)  - done but needs to be ad
 
 Delete commentcard and move mapped type - done
 
-Check that original Poster can delete peoples comments
+Check that original Poster can delete peoples comments - done
 
 Add roles - done
 
@@ -22,11 +22,15 @@ Check error handling and change schemas - done
 
 change signup form and login form - done
 
-Add winner after all games played
-
-Change ids in brackets to names
+Change ids in brackets to names - done
 
 Add start / finish date to front end -
 
-Add font
+Add font - done
 
+
+Add winner after all games played - need to do
+
+fix mini react errors - please
+
+  

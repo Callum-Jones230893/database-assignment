@@ -27,6 +27,6 @@ export const signUpSchema = z.object({
 
 export const tournamentSignupSchema = z.object({
   name: z.string(),
-  classroom: z.string().min(6, "Please enter your course or classroom name."),
+  classroom: z.string().min(6, "Please enter your course or classroom name.").optional,
   team: z.string()
 })

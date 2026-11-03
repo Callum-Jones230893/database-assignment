@@ -59,7 +59,7 @@ const nextBracket = async ({ bracketId, winnerId, slug }: NextBracketProps) => {
     if (nextRoundError) throw nextRoundError
   }
 
-  revalidatePath(`/${slug}`)
+  revalidatePath(`/tournaments/${slug}`)
   return { success: true }
 } 
 

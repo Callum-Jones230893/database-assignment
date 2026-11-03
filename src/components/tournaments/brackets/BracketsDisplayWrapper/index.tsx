@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction } from "react"
 import BracketsDisplay from "../BracketsDisplay"
 import { useQuery } from "@tanstack/react-query"
 import { setGenerated } from "@/actions/set-generated-action"
+import { createClient } from "@/lib/supabase/browserClient"
 
 type BracketDisplayWrapperProps = {
   tournament: TournamentType
@@ -18,17 +19,44 @@ const BracketsDisplayWrapper = ({ tournament, isCreator, generating, setGenerati
   const tournamentId = tournament?.id
   const slug = tournament.slug!
 
-  const { data: brackets, refetch } = useQuery({
+  const { data: tournamentData, refetch: refetchTournament } = useQuery({
+    queryKey: ["tournament", tournamentId],
+    initialData: tournament,
+    queryFn: async () => {
+      const supabase = createClient()
+      const { data, error } = await supabase
+        .from("tournament")
+        .select(`
+          id,
+          tournament_name,
+          slug,
+          generated,
+          created_by (
+            id,
+            username
+          )
+        `)
+        .eq("id", tournamentId)
+        .single()
+
+      if (error) throw error
+
+      return data as TournamentType
+    }
+  })
+
+  const { data: brackets, refetch: refetchBrackets } = useQuery({
     queryKey: ["brackets", tournament.id],
-    refetchInterval: 300, 
     queryFn: async () => {
       const { data, error } = await getBrackets(tournamentId)
+      
       if (error) throw new Error()
+
       return data
     }
   })
 
-  const isGenerated = brackets && brackets.length > 0 && tournament.generated === true
+  const isGenerated = brackets && brackets.length > 0 && tournamentData.generated === true
 
   const handlePopulation = async () => {
     setGenerating(true)
@@ -36,7 +64,10 @@ const BracketsDisplayWrapper = ({ tournament, isCreator, generating, setGenerati
       await generateTournament({tournamentId, slug})
       await setGenerated(tournamentId, slug)
 
-      await refetch()
+       await Promise.all([
+        refetchBrackets(),
+        refetchTournament()
+      ])
     } catch (error) {
       console.log("Error genertating brackets", error)
     } finally {
