@@ -25,7 +25,7 @@ export const EditComment = async({ commentData, commentId, slug }: EditCommentPr
     throw new Error ("Comment doesnt exist")
   }
   
-  const {data: updatedComments} = await supabase
+  const {data: updatedComments, error: updateError} = await supabase
     .from("comments")
     .update({
       ...parsedData,
@@ -34,6 +34,8 @@ export const EditComment = async({ commentData, commentId, slug }: EditCommentPr
     .select("slug")
     .single()
     .throwOnError()
+
+  if (updateError) throw updateError
 
   redirect(`/${slug}`)
 }

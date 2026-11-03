@@ -42,7 +42,7 @@ export const EditPost = async({ postData, postId }: {postData:z.infer<typeof cre
     updatedImages = data.image || []
   }
 
-  const {data: updatedPosts} = await supabase
+  const {data: updatedPosts, error: updateError} = await supabase
     .from("post")
     .update({
       ...parsedData,
@@ -52,6 +52,8 @@ export const EditPost = async({ postData, postId }: {postData:z.infer<typeof cre
     .select("slug")
     .single()
     .throwOnError()
+
+  if(updateError) throw updateError
 
   redirect(`/${updatedPosts.slug}`)
 }

@@ -12,6 +12,5 @@ export const DeleteTournament = async (tournamentId: string) => {
     .eq("id", tournamentId)
     .throwOnError()
     
-  revalidatePath("/")
   redirect("/")
 }
