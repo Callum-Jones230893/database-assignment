@@ -43,10 +43,10 @@ export const HostTournament = async(tournamentDetails :z.infer<typeof createTour
     })
     .select("tournament_name")
 
-    if (error) {
-      console.error(error.message)
-      return { error: "Couldn't create tournament, please try again later." }
-    }
+  if (error) {
+    console.error(error.message)
+    return { error: "Couldn't create tournament, please try again later." }
+  }
 
-  return { slug }
+  redirect(`/tournaments/${slug}`)
 }
