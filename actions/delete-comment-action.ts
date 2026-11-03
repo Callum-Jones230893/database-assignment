@@ -11,4 +11,5 @@ export const DeleteComment = async (commentId: string) => {
     .eq("id", commentId)
     
   revalidatePath("/")
+  return { success: true }
 }

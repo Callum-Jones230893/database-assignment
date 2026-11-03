@@ -9,7 +9,11 @@ export const Login = async (userdata:z.infer<typeof loginSchema>) => {
   const supabase = await createClient()
   const {data, error} = await supabase.auth.signInWithPassword(userdata)
 
-  if (error) throw error
-
+  if (error) {
+    if (error) {
+      return { error: "Invalid credentials." }
+    }
+    throw error
+  }
   redirect("/")
 }
