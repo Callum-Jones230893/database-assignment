@@ -50,5 +50,4 @@ export const HostTournament = async(tournamentDetails :z.infer<typeof createTour
   }
 
   revalidatePath(`/tournaments/${slug}`)
-  redirect(`/tournaments/${slug}`)
 }
