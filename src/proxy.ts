@@ -41,7 +41,7 @@ export async function UpdateSession(request: NextRequest) {
   const protectedRoutes: RegExp[] = [
     /^\/createPost\/?$/,
     /^\/[^\/]+\/editPost\/?$/,
-    /^\/[^\/]+\/createTournament\/?$/,
+    /^\/createTournament\/?$/,
   ]
 
   if (!user && protectedRoutes.some((route) => route.test(request.nextUrl.pathname))) {
