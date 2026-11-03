@@ -14,7 +14,9 @@ export const setGenerated = async (tournamentId: string, slug: string) => {
     })
     .eq("id", tournamentId)
 
-  if (generationError) throw generationError
+  if (generationError) {
+    return { error: "Couldn't generate tournament, please try again later." }
+  }
 
   revalidatePath(slug)
   redirect(slug)

@@ -35,7 +35,9 @@ export const EditComment = async({ commentData, commentId, slug }: EditCommentPr
     .single()
     .throwOnError()
 
-  if (updateError) throw updateError
+  if (error) {
+    return { error: "Couldn't update, please try again later." }
+  }
 
   redirect(`/${slug}`)
 }

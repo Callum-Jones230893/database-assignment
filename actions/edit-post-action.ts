@@ -53,7 +53,9 @@ export const EditPost = async({ postData, postId }: {postData:z.infer<typeof cre
     .single()
     .throwOnError()
 
-  if(updateError) throw updateError
+  if (error) {
+    return { error: "Couldn't update, please try again later." }
+  }
 
   redirect(`/${updatedPosts.slug}`)
 }
