@@ -56,9 +56,22 @@ const NewTournament = () => {
         onClick={(e) => e.stopPropagation()}
         className="post-form"
       >
-        <label htmlFor="title" className="field-header">Tournament title</label>
+        <label htmlFor="title" className="field-header text-center">Tournament title</label>
         <input {...register("title")} placeholder="title..." className="input" />
         {errors.title && <ErrorMessage error={errors.title.message!}/>}
+
+        <div className="flex flex-col md:flex-row gap-5 md:gap-0 items-center justify-between mx-auto w-1/2">
+          <div className="flex flex-col items-center justify-center w-1/2 gap-2">
+            <label htmlFor="start" className="field-header">Start date</label>
+            <input {...register("start")} placeholder="Start date..." className="border border-accent-one rounded-sm p-2" />
+            {errors.title && <ErrorMessage error={errors.title.message!}/>}
+          </div>
+          <div className="flex flex-col items-center justify-center w-1/2 gap-2">
+            <label htmlFor="end" className="field-header">End date</label>
+            <input {...register("end")} placeholder="End date..." className="border border-accent-one rounded-sm p-2" />
+            {errors.title && <ErrorMessage error={errors.title.message!}/>}
+          </div>
+        </div>
 
         <div className="flex justify-between w-[90%] md:w-1/2 mx-auto py-10">
           <button><i className="fa-regular fa-circle-check fa-icon"></i></button>
