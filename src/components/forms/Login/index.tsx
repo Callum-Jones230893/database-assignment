@@ -33,7 +33,7 @@ const LoginForm = () => {
         <button className="flex justify-center">
           <Image src={loginIcon} alt="Login" height={100} width={100} className="icons"/>
         </button>
-        {error && <p>{error.message}</p>}
+        {error && <ErrorMessage error={error.message} />}
       </form>
     </div>
   );
