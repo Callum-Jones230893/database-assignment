@@ -14,8 +14,8 @@ type TournamentWrapperProps = {
 }
 
 const TournamentWrapper = ({ tournament, signups, isCreator }: TournamentWrapperProps) => {
-  console.log(signups)
   const [generating, setGenerating] = useState<boolean>(false)
+  const [hasGenerated, setHasGenerated] = useState<boolean>(false)
 
   return (
     <div className="flex flex-col w-4/5 gap-6 mx-auto mb-10">
@@ -32,9 +32,10 @@ const TournamentWrapper = ({ tournament, signups, isCreator }: TournamentWrapper
           </div>
         }
       </div>
-      {tournament.generated === false && <SignupWrapper tournament={tournament} signups={signups} />}
+      {tournament.generated === false && hasGenerated && <SignupWrapper tournament={tournament} signups={signups} />}
       {signups && signups.length >= 4 &&
         <BracketDisplayWrapper
+          setHasGenerated={setHasGenerated}
           tournament={tournament}
           isCreator={isCreator}
           generating={generating}

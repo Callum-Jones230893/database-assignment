@@ -9,13 +9,14 @@ import { setGenerated } from "@/actions/set-generated-action"
 import { createClient } from "@/lib/supabase/browserClient"
 
 type BracketDisplayWrapperProps = {
+  setHasGenerated: Dispatch<SetStateAction<boolean>>
   tournament: TournamentType
   isCreator: boolean
   generating: boolean
   setGenerating: Dispatch<SetStateAction<boolean>>
 }
 
-const BracketsDisplayWrapper = ({ tournament, isCreator, generating, setGenerating }: BracketDisplayWrapperProps) => {
+const BracketsDisplayWrapper = ({ setHasGenerated, tournament, isCreator, generating, setGenerating }: BracketDisplayWrapperProps) => {
   const tournamentId = tournament?.id
   const slug = tournament.slug!
 
@@ -72,6 +73,7 @@ const BracketsDisplayWrapper = ({ tournament, isCreator, generating, setGenerati
       console.log("Error genertating brackets", error)
     } finally {
       setGenerating(false)
+      setHasGenerated(true)
     }
   }
 
