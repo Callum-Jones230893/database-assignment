@@ -13,8 +13,6 @@ export const createPostSchema = z.object({
 
 export const createTournamentSchema = z.object({
   title: z.string().min(6, "Please enter a valid title of atleast six characters."),
-  start: z.string(),
-  end: z.string()
 })
 
 export const commentSchema = z.object({
