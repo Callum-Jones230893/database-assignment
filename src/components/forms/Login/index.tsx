@@ -15,7 +15,7 @@ const LoginForm = () => {
     resolver: zodResolver(loginSchema)
   })
 
-  const { mutate, error } = useMutation({
+  const { mutate, error, data } = useMutation({
     mutationFn: Login,
   })
 
@@ -33,7 +33,7 @@ const LoginForm = () => {
         <button className="flex justify-center">
           <Image src={loginIcon} alt="Login" height={100} width={100} className="icons"/>
         </button>
-        {error && <ErrorMessage error={error.message} />}
+        {data?.error && <ErrorMessage error={data.error} />}
       </form>
     </div>
   );
