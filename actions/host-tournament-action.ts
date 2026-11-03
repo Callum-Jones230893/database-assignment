@@ -5,7 +5,6 @@ import { redirect } from "next/navigation"
 import { createTournamentSchema } from "./schemas"
 import z from "zod"
 import { slugify } from "@/lib/supabase/slugify"
-import { revalidatePath } from "next/cache"
 
 export const HostTournament = async(tournamentDetails :z.infer<typeof createTournamentSchema>) => {
   const supabase = await createClient()
@@ -44,10 +43,10 @@ export const HostTournament = async(tournamentDetails :z.infer<typeof createTour
     })
     .select("tournament_name")
 
-  if (error) {
-    console.error(error.message)
-    return { error: "Couldn't create tournament, please try again later." }
-  }
+    if (error) {
+      console.error(error.message)
+      return { error: "Couldn't create tournament, please try again later." }
+    }
 
-  redirect(`/tournaments/${slug}`)
+  return { slug }
 }

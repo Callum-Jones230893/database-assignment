@@ -9,11 +9,13 @@ import z from "zod"
 import { useState } from "react"
 import { HostTournament } from "@/actions/host-tournament-action"
 import ConfirmationModal from "@/components/ConfirmationModal"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/router"
 
 export type TournamentValues = z.infer<typeof createTournamentSchema>
 
 const NewTournament = () => {
+  const router = useRouter() 
+
   const [confirm, setConfirm] = useState<boolean>(false)
   const [storedValues, setStoredValues] = useState<TournamentValues | null>(null)
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false)
@@ -46,7 +48,7 @@ const NewTournament = () => {
 
   const handleClick = () => {
     setNewTournament(false)
-    redirect("/tournaments")
+    router.push("/tournaments")
   }
 
   return (
