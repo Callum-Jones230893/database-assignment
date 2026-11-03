@@ -32,7 +32,7 @@ const TournamentWrapper = ({ tournament, signups, isCreator }: TournamentWrapper
           </div>
         }
       </div>
-      {tournament.generated === false && hasGenerated && <SignupWrapper tournament={tournament} signups={signups} />}
+      {tournament.generated === false && !hasGenerated && <SignupWrapper tournament={tournament} signups={signups} />}
       {signups && signups.length >= 4 &&
         <BracketDisplayWrapper
           setHasGenerated={setHasGenerated}
