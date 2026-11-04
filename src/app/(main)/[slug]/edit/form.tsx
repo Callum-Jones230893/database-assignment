@@ -8,8 +8,11 @@ import z from "zod"
 import { createPostSchema } from "../../../../../actions/schemas"
 import { EditPost } from "../../../../../actions/edit-post-action"
 import { Tables } from "@/lib/supabase/database.types"
+import { useRouter } from "next/navigation"
 
 const EditPageForm = ({ initialValues, postId }: {initialValues: Pick<Tables<"post">, "title" | "content" | "image">, postId: string}) => {
+  const router = useRouter()  
+
   const postImageSchema = createPostSchema.omit({ image: true }).extend({
     image: z
       .unknown()
@@ -32,7 +35,10 @@ const EditPageForm = ({ initialValues, postId }: {initialValues: Pick<Tables<"po
   })
 
   const { mutate, error } = useMutation({
-    mutationFn: EditPost
+    mutationFn: EditPost,
+    onSuccess: (result) => {
+      router.push(`/${result.slug}`)
+    },
   })
 
   return (
@@ -49,7 +55,8 @@ const EditPageForm = ({ initialValues, postId }: {initialValues: Pick<Tables<"po
           postId,
         })
       })} 
-        className="post-form">
+        className="post-form"
+      >
         <label htmlFor="title" className="field-header">Title</label>
         <input {...register("title")} placeholder="title..." className="input " />
         {errors.title && <ErrorMessage error={errors.title.message!}/>}
