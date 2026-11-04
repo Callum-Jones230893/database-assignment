@@ -58,6 +58,8 @@ export const EditPost = async({ postData, postId }: {postData:z.infer<typeof cre
     return { error: "Couldn't update, please try again later." }
   }
 
+  let slug = updatedPosts.slug
+
   revalidatePath(`/${updatedPosts.slug}`)
-  return { success: true }
+  return { success: true, slug }
 }
