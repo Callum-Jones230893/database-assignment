@@ -1,7 +1,7 @@
 "use client"
 
 import { useMutation } from "@tanstack/react-query"
-import router from "next/router"
+import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 type DeleteButtonProps = {
@@ -11,14 +11,18 @@ type DeleteButtonProps = {
 }
 
 const DeleteButton = ({ id, mutateFn, successMessage = "Successfully deleted" }: DeleteButtonProps) => {
+  const router = useRouter()
 
   const { mutate } = useMutation({
     mutationFn: mutateFn,
     onSuccess: () => {
       toast.success(successMessage)
-      router.push("/")
+      router.replace("/")
     },
-    onError: () => toast.error("Error, please try again."),
+    onError: (error) => {
+      console.error(error)
+      toast.error("Error, please try again.")
+    },
   })
 
   return (

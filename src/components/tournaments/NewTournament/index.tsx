@@ -9,7 +9,7 @@ import z from "zod"
 import { useState } from "react"
 import { HostTournament } from "@/actions/host-tournament-action"
 import ConfirmationModal from "@/components/ConfirmationModal"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 export type TournamentValues = z.infer<typeof createTournamentSchema>
 
@@ -18,6 +18,8 @@ const NewTournament = () => {
   const [storedValues, setStoredValues] = useState<TournamentValues | null>(null)
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false)
   const [newTournament, setNewTournament] = useState<boolean>(false)
+
+  const router = useRouter()
 
   const { register, handleSubmit, formState: { errors }, } = useForm<TournamentValues>({
     resolver: zodResolver(createTournamentSchema),
@@ -30,6 +32,7 @@ const NewTournament = () => {
       setConfirm(false)
       setStoredValues(null)
       setNewTournament(false)
+      router.push("/tournaments")
     },
   })
 
@@ -46,7 +49,7 @@ const NewTournament = () => {
 
   const handleClick = () => {
     setNewTournament(false)
-    redirect("/tournaments")
+    router.push("/tournaments")
   }
 
   return (

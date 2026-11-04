@@ -65,5 +65,6 @@ export const CreatePost = async(postContent:z.infer<typeof createPostSchema>) =>
   }
 
   revalidatePath(`/${slug}`)
-  redirect(`/${slug}`)
+
+  return { success: true, slug }
 }

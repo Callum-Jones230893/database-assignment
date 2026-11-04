@@ -41,5 +41,6 @@ export const CreateComment = async({ commentContent, postId, slug, parentId }: C
   }
   
   revalidatePath(`/${slug}`)
-  return { success: true }
+
+  return { success: true, slug }
 }

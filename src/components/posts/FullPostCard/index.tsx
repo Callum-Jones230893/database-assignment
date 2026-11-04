@@ -26,7 +26,7 @@ const FullPostCard = ({ post, slug, isAuthor }: FullPostCardProps) => {
                 </div>
               )}
             </div>
-            <p className="md:text-xl w-[70%] mx-auto py-5">{post.content}</p>
+            <p className="md:text-xl w-[70%] text-center py-5">{post.content}</p>
           </div>
           {isAuthor && 
           <div className="flex gap-2 justify-end items-center">

@@ -47,5 +47,5 @@ export const HostTournament = async(tournamentDetails :z.infer<typeof createTour
     return { error: "Couldn't create tournament, please try again later." }
   }
   
-  redirect(`/tournaments/${slug}`)
+  return { success: true, slug }
 }

@@ -34,5 +34,5 @@ export const TournamentSignup = async ({ name, classroom, team, tournamentId, to
   }
 
   revalidatePath(`/tournaments/${slug}`)
-  return { success: true }
+  return { success: true, slug }
 }

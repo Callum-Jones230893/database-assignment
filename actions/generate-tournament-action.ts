@@ -68,11 +68,11 @@ const generateTournament = async ({ tournamentId, slug }: GenerateTournamentProp
     .insert(bracketRows)
   
   if (error) {
-    return { success: false, error: error.message }
+    throw new Error(error.message)
   }
 
   revalidatePath(`/tournaments/${slug}`)
-  return { success: true }
+  return { success: true, slug }
 }
 
 export default generateTournament

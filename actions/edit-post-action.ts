@@ -5,6 +5,7 @@ import { createPostSchema } from "./schemas"
 import { createClient } from "@/lib/supabase/serverClient"
 import { redirect } from "next/navigation"
 import { uploadImage } from "@/lib/supabase/upload-image"
+import { revalidatePath } from "next/cache"
 
 export const EditPost = async({ postData, postId }: {postData:z.infer<typeof createPostSchema>, postId: string}) => {
   const parsedData = createPostSchema.parse(postData)
@@ -53,9 +54,10 @@ export const EditPost = async({ postData, postId }: {postData:z.infer<typeof cre
     .single()
     .throwOnError()
 
-  if (error) {
+  if (updateError) {
     return { error: "Couldn't update, please try again later." }
   }
 
-  redirect(`/${updatedPosts.slug}`)
+  revalidatePath(`/${updatedPosts.slug}`)
+  return { success: true }
 }

@@ -9,12 +9,15 @@ import ErrorMessage from "@/components/ErrorMessage"
 import z from "zod"
 import { useState } from "react"
 import ConfirmationModal from "@/components/ConfirmationModal"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 const NewPost = () => {
   const [confirm, setConfirm] = useState<boolean>(false)
   const [storedValues, setStoredValues] = useState<PostValues | null>(null)
   const [confirmOpen, setConfirmOpen] = useState<boolean>(false)
-  const [newPost, setNewPost] = useState<boolean>(false)
+
+  const router = useRouter()
 
   const postImageSchema = createPostSchema.omit({ image: true }).extend({
     image: z
@@ -43,10 +46,14 @@ const NewPost = () => {
           ? values.image
           : undefined
       }),
-    onSuccess: () => {
+    onSuccess: (result) => {
       setConfirm(false)
       setStoredValues(null)
       setConfirmOpen(false)
+      router.push(`/${result.slug}`)
+    },
+    onError: () => {
+      toast.error("Something went wrong.")
     }
   })
 
