@@ -18,8 +18,8 @@ const FullPostCard = ({ post, slug, isAuthor }: FullPostCardProps) => {
         <div className="full-post-card">
           <h3 className="subtitle">{post.title}</h3>
             <p className="text-center py-5">Posted by {post.author.username}</p>
-          <div>
-            <div className="flex flex-col justify-center items-center md:grid md:grid-cols-3 md:grid-auto-flow-row w-1/2 mx-auto my-5 gap-y-10">
+          <div className='flex flex-col items-center'>
+            <div className="flex flex-col items-center lg:grid grid-cols-3 grid-auto-flow-row w-9/12 place-items-center my-5 gap-10">
               {post.image?.map((image: string) => 
                 <div key={image} className='w-50 h-auto'>
                   <img src={image} alt={image} /> 
