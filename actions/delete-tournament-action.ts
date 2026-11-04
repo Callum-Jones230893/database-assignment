@@ -1,7 +1,6 @@
 "use server"
 
 import { createClient } from "@/lib/supabase/serverClient"
-import { redirect } from "next/navigation"
 
 export const DeleteTournament = async (tournamentId: string) => {
   const supabase = await createClient();
@@ -11,5 +10,5 @@ export const DeleteTournament = async (tournamentId: string) => {
     .eq("id", tournamentId)
     .throwOnError()
     
-  redirect("/")
+  return { success: true }
 }
