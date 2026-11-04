@@ -34,7 +34,7 @@ export const CreatePost = async(postContent:z.infer<typeof createPostSchema>) =>
 
   const { title, content, image } = validatedData.data
 
-  const slug = slugify(title)
+  const slug = `${slugify(title)}-${crypto.randomUUID().slice(0, 4)}`
 
   let imgFiles: File[] = []
 

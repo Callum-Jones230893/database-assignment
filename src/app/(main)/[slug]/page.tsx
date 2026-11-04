@@ -1,5 +1,5 @@
 import PostWrapper from "@/components/posts/PostWrapper"
-import { getComment, getFullPost, getTournament } from "@/lib/supabase/queries"
+import { getComment, getFullPost } from "@/lib/supabase/queries"
 import { createClient } from "@/lib/supabase/serverClient"
 
 const PostPage = async ({ params }: { params: { slug: string } }) => {

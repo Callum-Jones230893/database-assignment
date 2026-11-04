@@ -32,7 +32,7 @@ export const HostTournament = async(tournamentDetails :z.infer<typeof createTour
 
   const { title } = validatedData.data
 
-  const slug = slugify(title)
+  const slug = `${slugify(title)}-${crypto.randomUUID().slice(0, 4)}`
 
   const { error } = await supabase
     .from("tournament")
