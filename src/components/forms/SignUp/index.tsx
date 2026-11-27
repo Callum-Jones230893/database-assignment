@@ -8,8 +8,11 @@ import ErrorMessage from "@/components/ErrorMessage";
 import { useMutation } from "@tanstack/react-query";
 import Image from 'next/image'
 import signupIcon from "@/public/images/icons/sign_up.png"
+import { useRouter } from "next/navigation"
 
 const SignUpForm = () => {
+
+  const router = useRouter()
 
   const { register, handleSubmit, formState: {errors} } = useForm({
     resolver: zodResolver(signUpSchema)
@@ -17,6 +20,9 @@ const SignUpForm = () => {
 
   const { mutate, error } = useMutation({
     mutationFn: SignUp,
+    onSuccess: () => {
+      router.push("/")
+    }
   })
   console.log("mutation error", error)
 
